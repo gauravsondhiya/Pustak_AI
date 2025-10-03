@@ -1,8 +1,12 @@
 import React from 'react'
-
+import Chat from './Chat'
+import Navbar from './Navbar'
 const App = () => {
   return (
-    <div>App</div>
+    <div>
+      <Navbar></Navbar>
+      <Chat></Chat>
+    </div>
   )
 }
 
