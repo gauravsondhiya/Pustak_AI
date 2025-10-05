@@ -1,30 +1,17 @@
-import { PDFLoader } from "@langchain/community/document_loaders/fs/pdf";
-import { GoogleGenerativeAIEmbeddings } from "@langchain/google-genai";
-import { QdrantVectorStore } from "@langchain/qdrant";
+import express from 'express'
+import chat from './routes/chat.js'
+const app= express()
 
-import dotenv from 'dotenv';
-dotenv.config();
-// import 'dotenv/config'
+app.use(express.json())
 
-async function pdfloader() {
-  const resume = "./textresume.pdf";
-  const loader = new PDFLoader(resume);
-  const docs = await loader.load();
-  // docs[0];
+app.use('/api/chat',chat)
+
+app.get("/",(req,res)=>{
+    res.send("done")
+})
 
 
-  const embeddings = new GoogleGenerativeAIEmbeddings({
-  model: "text-embedding-004", // 768 dimensions
-  // taskType: TaskType.RETRIEVAL_DOCUMENT,
-  // title: "Document title",
-});
 
-const vectorStore = await QdrantVectorStore.fromDocuments(docs,embeddings,{
-  url:"http://localhost:6333",
-  collectionName:"gs-resume"
-}) 
-
-console.log("done")
-}
-
-pdfloader(); 
+app.listen(3000,()=>{
+    console.log("server running")
+})

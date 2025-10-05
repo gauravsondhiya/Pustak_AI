@@ -7,29 +7,30 @@ const openai = new OpenAI({
   baseURL: "https://generativelanguage.googleapis.com/v1beta/openai/",
 });
 
-
 async function chat() {
+  //  user ka question
   const userquery = "who is gaurav";
 
+  // question vector embeddings may convert hoga
   const embeddings = new GoogleGenerativeAIEmbeddings({
     model: "text-embedding-004", // 768 dimensions
   });
 
-
   const vectorStore = await QdrantVectorStore.fromExistingCollection(
     embeddings,
     {
-      url: "http://localhost:6333",
+      url: "https://b3449b43-d3ff-420c-959d-e9191b3ceae5.eu-west-2-0.aws.cloud.qdrant.io:6333",
+      apiKey:
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJtIn0.WfOn_v2TMOiplSDt5xT-WIr8bKTri90XG960BylsAJY",
       collectionName: "gs-resume",
     }
   );
-
 
   const vectorsearch = vectorStore.asRetriever({
     k: 3,
   });
 
-  
+  // vector database may search ho rha ha
   const relventans = await vectorsearch.invoke(userquery);
 
   const SYSTEM_PROMPT = `
@@ -42,6 +43,7 @@ async function chat() {
     ${JSON.stringify(relventans)}
   `;
 
+  //  ai unable answer milega yha se
   const response = await openai.chat.completions.create({
     model: "gemini-2.0-flash",
     messages: [
@@ -56,5 +58,4 @@ async function chat() {
   console.log(response.choices[0].message.content);
 }
 
-
-chat()
+chat();
