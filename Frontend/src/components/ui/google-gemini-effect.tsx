@@ -31,9 +31,9 @@ export const GoogleGeminiEffect = ({
           context,connect ideas and provides insight that help you make better decision`}
       </p>
       <div className="w-full h-[890px] -top-10 md:-top-40  flex items-center justify-center bg-red-transparent absolute ">
-        {/* <h1 className="font-bold bg-white md:px-4 md:py-2 px-2 py-1 md:mt-24 mt-8 z-30 md:text-base text-black text-xs  w-fit mx-auto ">
-          पुस्तक AI.com
-        </h1> */}
+        <h1 className="font-bold z-30  text-black text-2xl  ">
+         Smart answers, straight from your documents.
+        </h1>
       </div>
       <svg
         width="1440"
