@@ -6,6 +6,7 @@ import { AiFillOpenAI } from "react-icons/ai";
 import { LuBrain } from "react-icons/lu";
 import Intro2 from "./Intro2";
 import {threesteps} from "./data"
+import Video from "./Video";
 
 const Intro = () => {
 
@@ -58,6 +59,7 @@ console.log(threesteps)
 
       <Intro2 />
        </div>
+       <Video/>
     </div>
   );
 };

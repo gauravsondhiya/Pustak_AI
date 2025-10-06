@@ -1,47 +1,41 @@
 import React from "react";
-import Scroller from './Scroller'
+import Scroller from "./Scroller";
 
 import { HoverEffect } from "../components/ui/card-hover-effect";
 import { RiContactsBookUploadLine } from "react-icons/ri";
-
+import Video from "./Video";
 const Intro2 = () => {
   let projects = [
     {
-      img: <RiContactsBookUploadLine />,
-      title: "Upload Any file",
+      title: "Upload Any Files",
       description:
-        "A technology company that builds economic infrastructure for the internet.",
+        "Support for PDFs, Word documents, images, and more. Our AI processes and understands your content instantly.",
       // link: "https://stripe.com",
     },
     {
-      title: "Netflix",
+      title: "Website Analysis",
       description:
-        "A streaming service that offers a wide variety of award-winning TV shows, movies, anime, documentaries, and more on thousands of internet-connected devices.",
-      link: "https://netflix.com",
+        "Paste any website URL and our AI will analyze the content, extract key information, and answer your questions.",
     },
     {
-      title: "Google",
+      title: "YouTube Integration",
       description:
-        "A multinational technology company that specializes in Internet-related services and products.",
-      link: "https://google.com",
+        "Link YouTube videos and get AI-powered summaries, transcript analysis, and answer questions about the content.",
     },
     {
-      title: "Meta",
+      title: "Intelligent Q&A",
       description:
-        "A technology company that focuses on building products that advance Facebook's mission of bringing the world closer together.",
-      link: "https://meta.com",
+        "Ask any question about your uploaded content and receive accurate, context-aware answers powered by advanced AI.",
     },
     {
-      title: "Amazon",
+      title: "Lightning Fast",
       description:
-        "A multinational technology company focusing on e-commerce, cloud computing, digital streaming, and artificial intelligence.",
-      link: "https://amazon.com",
+        "Get instant responses with our optimized AI processing. No waiting, no delays - just quick, accurate answers.",
     },
     {
-      title: "Microsoft",
+      title: "Secure & Private",
       description:
-        "A multinational technology company that develops, manufactures, licenses, supports, and sells computer software, consumer electronics, personal computers, and related services.",
-      link: "https://microsoft.com",
+        "Your data is encrypted and secure. We never store or share your personal information or uploaded content.",
     },
   ];
   let started = () => {
@@ -60,13 +54,14 @@ const Intro2 = () => {
         </button>
       </div>
 
-    <Scroller/>
+      <Scroller />
       {/* grid boxes */}
       <div>
         <div className="max-w-5xl mx-auto px-8">
           <HoverEffect items={projects} />
         </div>
       </div>
+
     </>
   );
 };
