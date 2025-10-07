@@ -1,6 +1,6 @@
 import React from "react";
 import Scroller from "./Scroller";
-
+import { NavLink } from "react-router";
 import { HoverEffect } from "../components/ui/card-hover-effect";
 import { RiContactsBookUploadLine } from "react-icons/ri";
 import Video from "./Video";
@@ -45,6 +45,7 @@ const Intro2 = () => {
   return (
     <>
       <div className="m-auto  flex justify-center mt-5">
+        <NavLink to="/chat">
         <button
           onClick={started}
           className="border text-2xl font-bold p-4 rounded-2xl bg-black text-white"
@@ -52,6 +53,7 @@ const Intro2 = () => {
           {" "}
           Get Started
         </button>
+        </NavLink>
       </div>
 
       <Scroller />
