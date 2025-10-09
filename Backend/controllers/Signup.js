@@ -1,0 +1,16 @@
+import usermodel from "../models/signin_models.js";
+
+
+const Signup = async (req, res) => {
+  try { 
+    const { name, surname, email } = req.body;
+    const user = new usermodel({ name, surname, email });
+    await user.save();
+    res.status(201).json({ message: "User created successfully!" });
+  } 
+  catch (error) {
+    res.status(500).json({ error: "Failed to save user" });
+  }
+}
+
+export default Signup
