@@ -2,7 +2,7 @@
 import { cn } from "../../lib/utils";
 import { motion, MotionValue } from "motion/react";
 import React from "react";
-import demo from "../../assets/demo.mp4";
+
 const transition = {
   duration: 0,
   ease: "linear",
@@ -30,7 +30,7 @@ export const GoogleGeminiEffect = ({
           `Transform How you work with information.Our AI-powered notebook understands
           context,connect ideas and provides insight that help you make better decision`}
       </p>
-      <div className="w-full h-[890px] -top-10 md:-top-40  flex items-center justify-center bg-red-transparent absolute ">
+      <div className="w-full h-[890px] top-10 md:-top-40  flex items-center justify-center bg-red-transparent absolute ">
         <h1 className="font-bold z-30  text-black text-2xl  ">
          Smart answers, straight from your documents.
         </h1>
