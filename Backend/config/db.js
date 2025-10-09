@@ -1,14 +1,13 @@
 import mongoose from "mongoose";
+import "dotenv/config";
 
 let dbcalling =async ()=>{
   try {
-     let connection = await mongoose.connect(
-    "mongodb+srv://pustak:qwe123@pustakai.ukeyhvh.mongodb.net/?retryWrites=true&w=majority&appName=Pustakai")
-    console.log("db connnected")
+     await mongoose.connect(process.env.MONGO_URI)
+     console.log("DB connneted")
   
   } catch (error) {
     console.log(error)
   }
-//    console.log(connection)
 }
-dbcalling()
+export default dbcalling

@@ -2,16 +2,17 @@ import mongoose, { Schema } from "mongoose";
 const signinuser = new Schema({
     name:{
         type:String,
-        // required:true
+        required:true
     },
     surname:{
         type:String,
-        // required:true
+        required:true
+    },
+    email:{
+        type:String,
+        required:true,
+        unique: true, 
     }
-    // email:{
-    //     type:String,
-    //     // required:true
-    // }
 
 })
 let usermodel= mongoose.model("signuptable",signinuser)
