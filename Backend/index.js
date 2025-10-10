@@ -1,5 +1,5 @@
 import express from 'express'
-import signin from './routes/signin.js'
+import authRoutes from "./routes/auth_routes.js"
 import dbcalling from './config/db.js'
 
 dbcalling()
@@ -7,7 +7,7 @@ const app= express()
 
 app.use(express.json())
 
-app.use("/api/signup",signin)
+app.use("/api/auth",authRoutes)
 
 
 app.get("/",(req,res)=>{

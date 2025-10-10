@@ -1,5 +1,6 @@
 import mongoose, { Schema } from "mongoose";
-const signinuser = new Schema({
+
+const Signinuser = new Schema({
     name:{
         type:String,
         required:true
@@ -12,8 +13,12 @@ const signinuser = new Schema({
         type:String,
         required:true,
         unique: true, 
+    },
+    password:{
+        type:String,
+        required:true
     }
 
 })
-let usermodel= mongoose.model("signuptable",signinuser)
-export default usermodel ;
+let siginuser= mongoose.model("signuptable",Signinuser)
+export default siginuser ;
