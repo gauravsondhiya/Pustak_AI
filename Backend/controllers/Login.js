@@ -5,6 +5,7 @@ let Login= async(req,res)=>{
     
     try {
         const{email,password} = req.body
+        console.log(email)
         const emailcheck = await siginuser.findOne({email})
         if(!emailcheck)return res.status(400).json({
             message:"user not found"
@@ -13,7 +14,7 @@ let Login= async(req,res)=>{
         if(!checkpassword)return res.status(400).json({
             message:checkpassword
         })
-        res.json("Login success")
+        res.json(true)
     } catch (error) {
         console.log(error)
     }

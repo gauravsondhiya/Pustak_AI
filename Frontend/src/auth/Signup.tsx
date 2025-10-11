@@ -3,15 +3,16 @@ import React, { useState } from "react";
 import { Label } from "../components/ui/label";
 import { Input } from "../components/ui/input";
 import { cn } from "../lib/utils";
-
+import { useNavigate } from "react-router";
 function Signup() {
+  let navigate = useNavigate();
   const [inputValues, setInputValues] = useState({
     name: "",
     surname: "",
     email: "",
     password: "",
   });
-
+  let [outerror, setouterror] = useState("");
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setInputValues((prev) => ({
@@ -29,17 +30,30 @@ function Signup() {
         },
         body: JSON.stringify(inputValues),
       });
-
-      // You can handle response here
       const data = await response.json();
-      console.log("Response:", data);
+      if (data === true) {
+        navigate("/login");
+      }
     } catch (error) {
       console.log("Error uploading data:", error);
     }
   };
-
+  const isDisabled =
+    !inputValues.email ||
+    !inputValues.password ||
+    !inputValues.name ||
+    !inputValues.surname;
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (
+      !inputValues.email ||
+      !inputValues.password ||
+      !inputValues.name ||
+      !inputValues.surname
+    ) {
+      setouterror("Please fill in all fields before logging in.");
+      return;
+    }
     uploadData();
     console.log("Form Data:", inputValues);
     setInputValues({
@@ -58,7 +72,9 @@ function Signup() {
       <p className="mt-2 max-w-sm text-sm text-neutral-600 dark:text-neutral-300">
         Your AI-powered library assistant – sign up & start exploring!
       </p>
-
+      {outerror && (
+        <p className="mt-3 text-sm text-red-500 font-medium">{outerror}</p>
+      )}
       <form className="my-8" onSubmit={handleSubmit}>
         <div className="mb-4 flex flex-col space-y-2 md:flex-row md:space-y-0 md:space-x-2">
           <LabelInputContainer>
@@ -113,6 +129,7 @@ function Signup() {
         <button
           className="group/btn relative block h-10 w-full rounded-md bg-gradient-to-br from-black to-neutral-600 font-medium text-white shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:bg-zinc-800 dark:from-zinc-900 dark:to-zinc-900 dark:shadow-[0px_1px_0px_0px_#27272a_inset,0px_-1px_0px_0px_#27272a_inset]"
           type="submit"
+          disabled={isDisabled}
         >
           Sign up &rarr;
           <BottomGradient />
