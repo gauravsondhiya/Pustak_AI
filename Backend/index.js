@@ -1,10 +1,10 @@
 import express from 'express'
 import authRoutes from "./routes/auth_routes.js"
 import dbcalling from './config/db.js'
-
+import cors from 'cors'
 dbcalling()
 const app= express()
-
+app.use(cors())
 app.use(express.json())
 
 app.use("/api/auth",authRoutes)

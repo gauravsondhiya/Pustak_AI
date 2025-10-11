@@ -30,7 +30,7 @@ export const GoogleGeminiEffect = ({
           `Transform How you work with information.Our AI-powered notebook understands
           context,connect ideas and provides insight that help you make better decision`}
       </p>
-      <div className="w-full h-[890px] top-10 md:-top-40  flex items-center justify-center bg-red-transparent absolute ">
+      <div className="w-full h-[890px] border border-red-800 top-10 md:-top-40  flex items-center justify-center bg-red-transparent absolute ">
         <h1 className="font-bold z-30  text-black text-2xl  ">
          Smart answers, straight from your documents.
         </h1>
