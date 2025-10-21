@@ -19,9 +19,8 @@ async function chat() {
   const vectorStore = await QdrantVectorStore.fromExistingCollection(
     embeddings,
     {
-      url: "https://b3449b43-d3ff-420c-959d-e9191b3ceae5.eu-west-2-0.aws.cloud.qdrant.io:6333",
-      apiKey:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJtIn0.WfOn_v2TMOiplSDt5xT-WIr8bKTri90XG960BylsAJY",
+    url: 'https://b3449b43-d3ff-420c-959d-e9191b3ceae5.eu-west-2-0.aws.cloud.qdrant.io:6333',
+    apiKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJtIn0.z-vqpCLeAKlESg5XD4gKAa9LLOtHktKQ2mZuUfAXOMY',
       collectionName: "gs-resume",
     }
   );
