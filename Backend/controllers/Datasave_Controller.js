@@ -1,7 +1,16 @@
 
+let Datasave = async(req,res)=>{
 
-let Datasave = async (req,res)=>{
-    res.send("helllo datasaveer")
+    let data = req.body
+  console.log("line 5")
+  console.log(data)
+  res.send(data)
+   
+    // console.log("File uploaded:");
+  // res.json({
+  //   message: "File uploaded successfully!",
+  //   file: req.file,
+  // });
 }
 
 

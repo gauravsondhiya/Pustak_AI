@@ -13,11 +13,8 @@ const Signin = async (req, res) => {
       })
     }
     const hashedpassword = await bcrypt.hash(password,10)
-    
     const user = new siginuser({ name, surname, email, password:hashedpassword });
-
     await user.save();
-
     res.status(201).json(true);
     
   } 
