@@ -5,8 +5,8 @@ import { upload } from '../middleware/Fileupload.js';
 const router = express.Router();
 
 router.post("/chat",Chat)
-// router.post("/data",upload.single("file"),Datasave)
-router.post("/data",Datasave)
+router.post("/data",upload.single("file"),Datasave)
+// router.post("/data",Datasave)
 
 
 

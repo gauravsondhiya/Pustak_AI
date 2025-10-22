@@ -1,8 +1,10 @@
 const Url_Controller = async (req, res) => {
   try {
-    let url_data = req.body;
-    console.log(url_data);
-    res.json(url_data);
+     console.log("Headers:", req.headers);
+  console.log("Body:", req.body);
+  // console.log("Query:", req.query);
+  // console.log("Params:", req.params);
+  res.send("Logged everything!");
   } catch (error) {
     console.log(error);
   }
