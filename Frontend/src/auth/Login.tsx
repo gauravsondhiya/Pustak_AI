@@ -31,7 +31,7 @@ function Login() {
         },
         body: JSON.stringify(inputvalue),
       };
-      let fetchdata = await fetch("http://localhost:3000/api/auth/login", method);
+      let fetchdata = await fetch(import.meta.env.VITE_Login_Route, method);
       let data = await fetchdata.json();
       console.log(data);
 

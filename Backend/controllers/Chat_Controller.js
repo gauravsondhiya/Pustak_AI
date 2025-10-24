@@ -1,7 +1,7 @@
 
 
 let Chat =(req,res)=>{
-res.send("hello hi gdfgdf")
+  res.send("i come form chat")
 }
 
 export default Chat;

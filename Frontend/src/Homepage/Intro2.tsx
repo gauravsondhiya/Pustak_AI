@@ -1,9 +1,8 @@
 import React from "react";
-import Scroller from "./Scroller";
 import { NavLink } from "react-router";
 import { HoverEffect } from "../components/ui/card-hover-effect";
 import { RiContactsBookUploadLine } from "react-icons/ri";
-import Video from "./Video";
+
 const Intro2 = () => {
   let projects = [
     {
@@ -56,7 +55,6 @@ const Intro2 = () => {
         </NavLink>
       </div>
 
-      <Scroller />
       {/* grid boxes */}
       <div>
         <div className="max-w-5xl mx-auto px-8">

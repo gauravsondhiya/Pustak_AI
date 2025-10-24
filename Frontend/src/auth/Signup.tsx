@@ -38,11 +38,7 @@ function Signup() {
       console.log("Error uploading data:", error);
     }
   };
-  const isDisabled =
-    !inputValues.email ||
-    !inputValues.password ||
-    !inputValues.name ||
-    !inputValues.surname;
+ 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (
@@ -63,6 +59,11 @@ function Signup() {
       password: "",
     });
   };
+   const isDisabled =
+    !inputValues.email ||
+    !inputValues.password ||
+    !inputValues.name ||
+    !inputValues.surname;
 
   return (
     <div className="mt-22 shadow-input mx-auto w-full max-w-md rounded-none bg-white p-4 md:rounded-2xl md:p-8 dark:bg-black">
