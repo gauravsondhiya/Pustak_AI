@@ -9,7 +9,7 @@ const openai = new OpenAI({
 
 async function chat() {
   //  user ka question
-  const userquery = "who is gaurav";
+  const userquery = "what is the context of jamelle";
 
   // question vector embeddings may convert hoga
   const embeddings = new GoogleGenerativeAIEmbeddings({
@@ -19,9 +19,9 @@ async function chat() {
   const vectorStore = await QdrantVectorStore.fromExistingCollection(
     embeddings,
     {
-    url: 'https://b3449b43-d3ff-420c-959d-e9191b3ceae5.eu-west-2-0.aws.cloud.qdrant.io:6333',
-    apiKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJtIn0.z-vqpCLeAKlESg5XD4gKAa9LLOtHktKQ2mZuUfAXOMY',
-      collectionName: "gs-resume",
+   url: 'https://b3449b43-d3ff-420c-959d-e9191b3ceae5.eu-west-2-0.aws.cloud.qdrant.io:6333',
+    apiKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJtIn0.0hpaUUjaHDr1xacy4p1RYPr2ayJmwPcUrOvgsvYYsJY',
+      collectionName:"testing",
     }
   );
 

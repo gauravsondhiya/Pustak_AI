@@ -64,7 +64,7 @@ console.log(docs[0])
 
 // 4️⃣ Store the data
 const vectorStore = await QdrantVectorStore.fromDocuments(docs,embeddings, {
- client,
+ url:"",
   collectionName: "PUSTAK_AI_PDF_DATA",
 });
 

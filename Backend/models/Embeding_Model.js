@@ -1,7 +1,10 @@
 import { GoogleGenerativeAIEmbeddings } from "@langchain/google-genai";
+import "dotenv/config"
 
-const embeddings = new GoogleGenerativeAIEmbeddings({
+const embeddings_convert = new GoogleGenerativeAIEmbeddings({
   model: "text-embedding-004",
 });
 
-export default embeddings;
+console.log("embedding method called")
+
+export default embeddings_convert;
