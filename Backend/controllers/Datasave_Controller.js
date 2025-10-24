@@ -1,36 +1,38 @@
-import { youtube } from "../Loaders/Youtube_loader.js";
-import { QdrantVectorStore } from "@langchain/qdrant";
-import embeddings_convert from "../models/Embeding_Model.js";
-import qdrant_client from "../config/Qudrant.js";
+import youtube from "../Loaders/Youtube_loader.js";
+import vectorStore from "../services/Vectorstore.js";
+import user_textinput from "../Loaders/Text_loader.js";
+import website_loader from "../Loaders/Website_loader.js";
 
 let Datasave = async (req, res) => {
   try {
-    const { youtube_data } = req.body;
+    const { youtube_data, text_data, website_data } = req.body;
+    const file_data = req.file;
 
     if (youtube_data) {
-      // Step 1: Load from YouTube
-      const youtube_loader_data = await youtube(youtube_data);
-
-      // Step 2: Upload to Qdrant
-      const vectorStore = await QdrantVectorStore.fromExistingCollection(
-        embeddings_convert,
-        {
-          client: qdrant_client,
-          collectionName: "testing",
-        }
-      );
-
-      // ✅ now safely add new documents
-      await vectorStore.addDocuments(youtube_loader_data);
-
-      // Add documents to your collection
-      // await vectorStore.addDocuments(youtube_loader_data);
-
-      console.log("YouTube data embedded and uploaded ✅");
-      return res.status(200).json({ message: "Data processed successfully" });
+        await youtube(youtube_data);
+      return res.status(200).json({ message: "Video succesfully uploaded" });
     }
 
-    res.status(400).json({ message: "No YouTube data provided" });
+    if (text_data) {
+      try {
+        await user_textinput(text_data);
+        return res.status(200).json({
+          message: "User input successfully uploaded",
+        });
+      } catch (error) {
+        console.error("❌ Failed to add documents:", error);
+        return res.status(404).json({
+          message: "User input not uploaded",
+        });
+      }
+    }
+
+    if (website_data) {
+      let getdata = await website_loader(website_data);
+       return res.status(200).json({ message: "website data succesfully uploaded" });
+    }
+
+    res.status(400).json({ message: "No data provided" });
   } catch (error) {
     console.error("Error in Datasave:", error);
     res.status(500).json({ error: "Internal server error" });

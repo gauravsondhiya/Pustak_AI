@@ -1,10 +1,11 @@
-import { TextLoader } from "langchain/document_loaders/fs/text";
+import vectorStore from "../services/Vectorstore.js";
+let user_textinput = async(text_data)=>{
+  const data = [
+      { pageContent: text_data, metadata: { source: "user Text input" } },
+    ];
+        await vectorStore.addDocuments(data);
+        console.log("✅ Documents successfully added to Qdrant!");
+        return;
+}
 
-const loader = new TextLoader(
-  "./uploads/text.txt"
-);
-
-
-const text_loader = await loader.load();
-
-export default text_loader;
+export default user_textinput;
