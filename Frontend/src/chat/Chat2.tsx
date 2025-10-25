@@ -7,21 +7,35 @@ const Chat2 = () => {
 
   let [aioutput, setaioutput] = useState("LLM output");
 
-  
-
   let get_fetch_data = async () => {
-    let bot= "bot reply"
-    let botreply={ id: Date.now(), msgsend: bot, sender: "bot" }
-     setdatapass((pre) => [...pre, botreply]);
-     console.log(bot)
+    console.log(userinput);
+    try {
+      let response = await await axios.post(
+        "http://localhost:3000/api/auth/chat",
+        { userinput }, // send as object
+        { headers: { "Content-Type": "application/json" } }
+      );
+      console.log(response.data);
+      setTimeout(() => {
+        let botreply = {
+          id: Date.now(),
+          msgsend: response.data,
+          sender: "bot",
+        };
+        setdatapass((pre) => [...pre, botreply]);
+      }, 1000); // 1 second delay for realism
+    } catch (error) {
+    console.log(error);
+    }
+    
   };
 
   let sendbtn = () => {
-      get_fetch_data()
+    get_fetch_data();
 
     let send = { id: Date.now(), msgsend: userinput, sender: "user" };
     setdatapass((pre) => [...pre, send]);
-    console.log(userinput);
+
     setuserinput(" ");
   };
 
@@ -34,12 +48,14 @@ const Chat2 = () => {
 
       {/* chat scrren */}
       <div className="border border-4 border-red-500 h-[70%] p-4">
-       {
-         datapass.map((e)=>(
-          <div className={`flex  ${
+        {datapass.map((e, i) => (
+          <div
+            key={i}
+            className={`flex  ${
               e.sender === "user" ? "justify-end" : "justify-start"
-            }`}>
-           <div
+            }`}
+          >
+            <div
               className={`border px-4 py-2 rounded-2xl max-w-xs break-words ${
                 e.sender === "user"
                   ? "bg-blue-500 text-white rounded-br-none"
@@ -49,16 +65,13 @@ const Chat2 = () => {
               {e.msgsend}
             </div>
           </div>
-         ))
-       }
-
-
+        ))}
       </div>
 
       <div className="border p-5 flex gap-3 h-[15%]">
         <input
           type="text"
-          value={userinput}
+          value= {userinput}
           onChange={(e) => setuserinput(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && sendbtn()}
           placeholder="Add a question about your sources..."

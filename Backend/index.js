@@ -18,6 +18,8 @@ app.use("/api/auth", authRoutes);
 //  datasave and chat route
 app.use("/api/auth",Chat)
 
+
+
 app.get("/", (req, res) => {
   res.send("Pustak_AI running");
 });

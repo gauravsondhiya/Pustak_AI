@@ -3,9 +3,7 @@ import { QdrantVectorStore } from "@langchain/qdrant";
 import "dotenv/config";
 import OpenAI from "openai";
 
-const openai = new OpenAI({
-  baseURL: "https://generativelanguage.googleapis.com/v1beta/openai/",
-});
+
 
 async function chat() {
   //  user ka question
@@ -18,11 +16,10 @@ async function chat() {
 
   const vectorStore = await QdrantVectorStore.fromExistingCollection(
     embeddings,
-    {
-   url: 'https://b3449b43-d3ff-420c-959d-e9191b3ceae5.eu-west-2-0.aws.cloud.qdrant.io:6333',
-    apiKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJtIn0.0hpaUUjaHDr1xacy4p1RYPr2ayJmwPcUrOvgsvYYsJY',
-      collectionName:"testing",
-    }
+     {
+    client: qdrant_client,
+    collectionName: "Pustak_AI_data",
+  }
   );
 
   const vectorsearch = vectorStore.asRetriever({
