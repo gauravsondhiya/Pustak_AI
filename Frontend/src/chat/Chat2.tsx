@@ -47,7 +47,7 @@ const Chat2 = () => {
       </div>
 
       {/* chat scrren */}
-      <div className="border border-4 border-red-500 h-[70%] p-4">
+      <div className="  border-red-500 h-[70%] p-4 overflow-scroll">
         {datapass.map((e, i) => (
           <div
             key={i}
