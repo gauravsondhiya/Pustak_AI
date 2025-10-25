@@ -2,82 +2,118 @@ import axios from "axios";
 import React, { useState } from "react";
 
 const Chat2 = () => {
-  let [userinput, setuserinput] = useState("");
-  let [datapass, setdatapass] = useState([]);
+  const [userinput, setuserinput] = useState("");
+  const [datapass, setdatapass] = useState([]);
+  const [loading, setloading] = useState(false); // default false
 
-  let [aioutput, setaioutput] = useState("LLM output");
-
-  let get_fetch_data = async () => {
+  const get_fetch_data = async () => {
     console.log(userinput);
+    setloading(true);
+
+    // Step 1: Show loader message in chat immediately
+    const loaderMsg = {
+      id: "loader",
+      msgsend: "typing...", // temp text
+      sender: "bot",
+      isLoader: true, // special flag
+    };
+    setdatapass((pre) => [...pre, loaderMsg]);
+
     try {
-      let response = await await axios.post(
-        "http://localhost:3000/api/auth/chat",
-        { userinput }, // send as object
+      const response = await axios.post(
+        import.meta.env.VITE_CHAT_DATA,
+        { userinput },
         { headers: { "Content-Type": "application/json" } }
       );
-      console.log(response.data);
-      setTimeout(() => {
-        let botreply = {
+
+      // Step 2: Remove loader & add bot reply
+      setdatapass((pre) => [
+        ...pre.filter((msg) => msg.id !== "loader"), // remove loader
+        {
           id: Date.now(),
           msgsend: response.data,
           sender: "bot",
-        };
-        setdatapass((pre) => [...pre, botreply]);
-      }, 1000); // 1 second delay for realism
+        },
+      ]);
     } catch (error) {
-    console.log(error);
+      console.error(error);
+      // remove loader and show error
+      setdatapass((pre) => [
+        ...pre.filter((msg) => msg.id !== "loader"),
+        {
+          id: Date.now(),
+          msgsend: "⚠️ Error fetching data. Try again.",
+          sender: "bot",
+        },
+      ]);
+    } finally {
+      setloading(false);
     }
-    
   };
 
-  let sendbtn = () => {
-    get_fetch_data();
-
+  const sendbtn = () => {
+    if (!userinput.trim()) return;
     let send = { id: Date.now(), msgsend: userinput, sender: "user" };
     setdatapass((pre) => [...pre, send]);
-
-    setuserinput(" ");
+    get_fetch_data();
+    setuserinput("");
   };
 
   return (
-    <div className="sm:col-span-8 h-[600px] border border-amber-400">
-      <div className=" p-3 border border-gray-400  h-[15%] ">
+    <div className="sm:col-span-8 h-[600px]  border-amber-400 flex flex-col">
+      {/* Header */}
+      <div className="p-3 border-b border-gray-400">
         <h1 className="text-2xl font-bold">Chat</h1>
         <p>Ask questions about your uploaded sources</p>
       </div>
 
-      {/* chat scrren */}
-      <div className="  border-red-500 h-[70%] p-4 overflow-scroll">
+      {/* Chat Screen */}
+      <div className="flex-1 p-4 overflow-y-auto space-y-3">
         {datapass.map((e, i) => (
           <div
             key={i}
-            className={`flex  ${
+            className={`flex ${
               e.sender === "user" ? "justify-end" : "justify-start"
             }`}
           >
             <div
-              className={`border px-4 py-2 rounded-2xl max-w-xs break-words ${
+              className={` px-4 py-2 rounded-2xl max-w-xs break-words ${
                 e.sender === "user"
-                  ? "bg-blue-500 text-white rounded-br-none"
+                  ? "bg-black text-white rounded-br-none"
                   : "bg-gray-300 text-black rounded-bl-none"
               }`}
             >
-              {e.msgsend}
+              {/* Loader dots animation */}
+              {e.isLoader ? (
+                <div className="flex gap-1">
+                  <span className="w-2 h-2 bg-gray-500 rounded-full animate-bounce"></span>
+                  <span className="w-2 h-2 bg-gray-500 rounded-full animate-bounce [animation-delay:0.2s]"></span>
+                  <span className="w-2 h-2 bg-gray-500 rounded-full animate-bounce [animation-delay:0.4s]"></span>
+                </div>
+              ) : (
+                e.msgsend
+              )}
             </div>
           </div>
         ))}
       </div>
 
-      <div className="border p-5 flex gap-3 h-[15%]">
+      {/* Input Section */}
+      <div className="border-t p-5 flex gap-3">
         <input
           type="text"
-          value= {userinput}
+          value={userinput}
           onChange={(e) => setuserinput(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && sendbtn()}
-          placeholder="Add a question about your sources..."
-          className="border w-[90%] rounded-2xl p-4 focus:ring-2"
+          placeholder="Ask A Question About Your Sources..."
+          className="border w-[90%] rounded-2xl p-4 focus:ring-2 outline-none"
         />
-        <button onClick={sendbtn} className="border p-2 w-[80px] rounded-2xl">
+        <button
+          onClick={sendbtn}
+          disabled={loading}
+          className="border p-2 w-[80px] rounded-2xl
+           bg-black text-white disabled:bg-gray-400"
+        >
           Send
         </button>
       </div>

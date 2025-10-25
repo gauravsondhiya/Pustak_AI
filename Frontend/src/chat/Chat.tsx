@@ -5,6 +5,8 @@ import Chat2 from "./Chat2";
 
 const Chat = () => {
   const [filestate, setfilestate] = useState(null);
+  const [tempfile, settempfile] = useState([]);
+  const [loading, setloading] = useState(false);
   const [inputvalues, setinputvalues] = useState({
     website_data: "",
     file_data: null,
@@ -22,23 +24,47 @@ const Chat = () => {
   };
 
   const input_data_upload = async () => {
-    console.log(inputvalues)
-    if (!inputvalues) return alert("Please enter values!");
+    // Validation based on filestate
+    if (filestate === "file" && !inputvalues.file_data)
+      return alert("Please upload a file.");
+    if (filestate === "weburl" && !inputvalues.website_data)
+      return alert("Please enter a website URL.");
+    if (filestate === "url" && !inputvalues.youtube_data)
+      return alert("Please enter a YouTube URL.");
+    if (filestate === "text" && !inputvalues.text_data.trim())
+      return alert("Please enter some text.");
+
+    settempfile((prev) => [...prev, inputvalues]);
+    setloading(true);
+
     const formData = new FormData();
-    formData.append("website_data", inputvalues.website_data)
+    formData.append("website_data", inputvalues.website_data);
     formData.append("file_data", inputvalues.file_data);
     formData.append("youtube_data", inputvalues.youtube_data);
     formData.append("text_data", inputvalues.text_data);
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/auth/data",
+        import.meta.env.VITE_UPLOAD_DATA,
         formData,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
       console.log(response.data);
+      alert("Upload successful!");
+
+      // Reset input after upload
+      setinputvalues({
+        website_data: "",
+        file_data: null,
+        youtube_data: "",
+        text_data: "",
+      });
+      setfilestate(null);
     } catch (error) {
       console.error("Upload error:", error);
+      alert("Upload failed! Check console for details.");
+    } finally {
+      setloading(false);
     }
   };
 
@@ -52,28 +78,29 @@ const Chat = () => {
   const choosebtn = (type) => setfilestate(type);
 
   return (
-    <div className="border grid sm:grid-cols-12 mt-23 sm:h-[600px]">
-      <div className="sm:col-span-4 border p-5 h-[500px]">
+    <div className="border grid sm:grid-cols-12 mt-21 h-auto">
+      <div className="sm:col-span-4 border p-5 ">
         <h1 className="flex items-center text-2xl gap-4 font-bold">
           <FaUpload /> Upload Your Sources
         </h1>
 
-        <div className="flex justify-between mt-7 items-center">
-          <div className="flex gap-1 [&>button]:hover:bg-black [&>button]:hover:text-white [&>button]:p-2 [&>button]:text-xl [&>button]:rounded-2xl">
+        <div className="mt-7">
+          <div className="grid grid-cols-4 gap-2 justify-center m-auto [&>button]:hover:bg-black [&>button]:hover:text-white [&>button]:p-2 [&>button]:text-xl [&>button]:rounded-2xl">
             {arrbtn.map((e, i) => (
-              <button key={i} onClick={() => choosebtn(e.type)} >
+              <button
+                className={`border ${filestate === e.type ? "bg-black text-white" : ""}`}
+                key={i}
+                onClick={() => choosebtn(e.type)}
+              >
                 {e.btn}
               </button>
             ))}
           </div>
-          <button className="text-xl bg-black text-white font-bold p-2 rounded-2xl">
-            New Chat
-          </button>
         </div>
 
-        <div className="border mt-5 p-auto h-[200px]">
+        <div className="mt-5">
           {filestate === "file" && (
-            <div className="mt-3 p-2 flex justify-between items-center">
+            <div className="mt-2 p-2 flex justify-between items-center">
               <input
                 type="file"
                 name="file_data"
@@ -83,9 +110,10 @@ const Chat = () => {
               />
               <button
                 onClick={input_data_upload}
-                className="border font-bold rounded-2xl w-[90px] h-[60px] hover:bg-black hover:text-white"
+                disabled={loading}
+                className="border font-bold rounded-2xl w-[90px] h-[60px] hover:bg-black hover:text-white disabled:opacity-60"
               >
-                Add
+                {loading ? "Uploading..." : "Add"}
               </button>
             </div>
           )}
@@ -102,9 +130,10 @@ const Chat = () => {
               />
               <button
                 onClick={input_data_upload}
-                className="border rounded-2xl w-[90px] h-[60px]"
+                disabled={loading}
+                className="border rounded-2xl w-[90px] h-[60px] hover:bg-black hover:text-white disabled:opacity-60"
               >
-                Add
+                {loading ? "Uploading..." : "Add"}
               </button>
             </div>
           )}
@@ -121,9 +150,10 @@ const Chat = () => {
               />
               <button
                 onClick={input_data_upload}
-                className="border rounded-2xl w-[90px] h-[60px]"
+                disabled={loading}
+                className="border rounded-2xl w-[90px] h-[60px] hover:bg-black hover:text-white disabled:opacity-60"
               >
-                Add
+                {loading ? "Uploading..." : "Add"}
               </button>
             </div>
           )}
@@ -142,16 +172,51 @@ const Chat = () => {
               <div className="flex justify-between items-center">
                 <button
                   onClick={input_data_upload}
-                  className="px-4 mt-2 py-2 hover:bg-black border hover:text-white rounded-2xl font-medium transition-colors duration-200 flex items-center space-x-2"
+                  disabled={loading}
+                  className="px-4 mt-2 py-2 hover:bg-black border hover:text-white rounded-2xl font-medium transition-colors duration-200 flex items-center space-x-2 disabled:opacity-60"
                 >
-                  Submit Text
+                  {loading ? "Uploading..." : "Submit Text"}
                 </button>
               </div>
             </div>
           )}
         </div>
+
+        {/* Uploaded sources preview */}
+        <div className=" mt-2 p-3 rounded-xl">
+          <h2 className="text-lg font-semibold mb-2">Uploaded Sources</h2>
+          {tempfile.length === 0 ? (
+            <p className="text-gray-500">No uploads yet.</p>
+          ) : (
+            tempfile.map((item, index) => (
+              <div key={index} className=" rounded-2xl border p-2 my-2  ">
+                {item.file_data && (
+                  <p>
+                    <strong>File:</strong> {item.file_data.name}
+                  </p>
+                )}
+                {item.website_data && (
+                  <p>
+                    <strong>Website:</strong> {item.website_data}
+                  </p>
+                )}
+                {item.youtube_data && (
+                  <p>
+                    <strong>YouTube:</strong> {item.youtube_data}
+                  </p>
+                )}
+                {item.text_data && (
+                  <p className="truncate">
+                    <strong>Text:</strong> {item.text_data.slice(0, 100)}...
+                  </p>
+                )}
+              </div>
+            ))
+          )}
+        </div>
       </div>
-      <Chat2/>
+
+      <Chat2 />
     </div>
   );
 };
