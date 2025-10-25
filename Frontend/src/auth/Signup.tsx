@@ -23,7 +23,7 @@ function Signup() {
 
   const uploadData = async () => {
     try {
-      const response = await fetch("http://localhost:3000/api/auth/signin", {
+      const response = await fetch(import.meta.env.VITE_SIGNUP_ROUTE, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
