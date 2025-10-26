@@ -78,17 +78,18 @@ const Chat = () => {
   const choosebtn = (type) => setfilestate(type);
 
   return (
-    <div className="border grid sm:grid-cols-12 mt-21 h-auto">
-      <div className="sm:col-span-4 border p-5 ">
-        <h1 className="flex items-center text-2xl gap-4 font-bold">
+    <div className=" border border-gray-300  grid sm:grid-cols-12 mt-21 h-auto">
+      <div className="sm:col-span-4 border border-gray-300 p-5 ">
+        <h1 className="flex items-center text-2xl gap-4 font-bold p-2">
           <FaUpload /> Upload Your Sources
         </h1>
 
         <div className="mt-7">
-          <div className="grid grid-cols-4 gap-2 justify-center m-auto [&>button]:hover:bg-black [&>button]:hover:text-white [&>button]:p-2 [&>button]:text-xl [&>button]:rounded-2xl">
+          <div className="grid grid-cols-4 gap-2 justify-center m-auto [&>button]:p-2 [&>button]:text-xl [&>button]:rounded-2xl [&>button]:bg-black text-white ">
             {arrbtn.map((e, i) => (
               <button
-                className={`border ${filestate === e.type ? "bg-black text-white" : ""}`}
+              className="font-semibold hover:bg-gray-500
+           transition-all duration-300 group-hover:scale-200"  
                 key={i}
                 onClick={() => choosebtn(e.type)}
               >
@@ -106,12 +107,14 @@ const Chat = () => {
                 name="file_data"
                 accept=".pdf"
                 onChange={handleFileChange}
-                className="w-[75%] h-[60px] rounded-2xl p-3 border"
+                className="w-[75%] h-[60px] rounded-2xl p-4 border  hover:bg-gray-300
+           transition-all duration-300 group-hover:scale-200"
               />
               <button
                 onClick={input_data_upload}
                 disabled={loading}
-                className="border font-bold rounded-2xl w-[90px] h-[60px] hover:bg-black hover:text-white disabled:opacity-60"
+                className="border font-bold rounded-2xl w-[90px] h-[60px] bg-black text-white  font-semibold hover:bg-gray-500
+           transition-all duration-300 group-hover:scale-200"
               >
                 {loading ? "Uploading..." : "Add"}
               </button>
@@ -125,13 +128,15 @@ const Chat = () => {
                 name="website_data"
                 value={inputvalues.website_data}
                 onChange={handleinputvalues}
-                className="border w-[75%] h-[60px] rounded-2xl p-3"
+                className="border w-[75%] h-[60px] rounded-2xl p-3 font-semibold"
                 placeholder="Enter Website URL"
               />
               <button
                 onClick={input_data_upload}
                 disabled={loading}
-                className="border rounded-2xl w-[90px] h-[60px] hover:bg-black hover:text-white disabled:opacity-60"
+                className="border rounded-2xl w-[90px] hover:bg-gray-500
+           transition-all duration-300 group-hover:scale-200
+                h-[60px] bg-black text-white "
               >
                 {loading ? "Uploading..." : "Add"}
               </button>
@@ -145,13 +150,15 @@ const Chat = () => {
                 name="youtube_data"
                 value={inputvalues.youtube_data}
                 onChange={handleinputvalues}
-                className="border w-[75%] h-[60px] rounded-2xl p-3"
+                className="border w-[75%] h-[60px] rounded-2xl p-3 font-semibold"
                 placeholder="Enter YouTube URL"
               />
               <button
                 onClick={input_data_upload}
                 disabled={loading}
-                className="border rounded-2xl w-[90px] h-[60px] hover:bg-black hover:text-white disabled:opacity-60"
+                className="border rounded-2xl w-[90px] h-[60px] bg-black text-white
+                 hover:bg-gray-500
+           transition-all duration-300 group-hover:scale-200"
               >
                 {loading ? "Uploading..." : "Add"}
               </button>
@@ -173,7 +180,8 @@ const Chat = () => {
                 <button
                   onClick={input_data_upload}
                   disabled={loading}
-                  className="px-4 mt-2 py-2 hover:bg-black border hover:text-white rounded-2xl font-medium transition-colors duration-200 flex items-center space-x-2 disabled:opacity-60"
+                  className="px-4 mt-2 py-2 bg-black border text-white rounded-2xl font-medium  hover:bg-gray-500
+           transition-all duration-300 group-hover:scale-200 "
                 >
                   {loading ? "Uploading..." : "Submit Text"}
                 </button>
@@ -184,12 +192,12 @@ const Chat = () => {
 
         {/* Uploaded sources preview */}
         <div className=" mt-2 p-3 rounded-xl">
-          <h2 className="text-lg font-semibold mb-2">Uploaded Sources</h2>
+          <h2 className="text-lg font-semibold mb-2 ">Uploaded Sources</h2>
           {tempfile.length === 0 ? (
             <p className="text-gray-500">No uploads yet.</p>
           ) : (
             tempfile.map((item, index) => (
-              <div key={index} className=" rounded-2xl border p-2 my-2  ">
+              <div key={index} className="bg-gray-300 rounded-2xl p-5 my-2  ">
                 {item.file_data && (
                   <p>
                     <strong>File:</strong> {item.file_data.name}

@@ -99,20 +99,21 @@ const Chat2 = () => {
       </div>
 
       {/* Input Section */}
-      <div className="border-t p-5 flex gap-3">
+      <div className="border-t border border-gray-300  p-5 flex gap-3">
         <input
           type="text"
           value={userinput}
           onChange={(e) => setuserinput(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && sendbtn()}
           placeholder="Ask A Question About Your Sources..."
-          className="border w-[90%] rounded-2xl p-4 focus:ring-2 outline-none"
+          className="border w-[90%] font-semibold rounded-2xl p-4 focus:ring-2 outline-none"
         />
         <button
           onClick={sendbtn}
           disabled={loading}
           className="border p-2 w-[80px] rounded-2xl
-           bg-black text-white disabled:bg-gray-400"
+           bg-black text-white disabled:bg-gray-400  hover:bg-gray-500
+           transition-all duration-300 group-hover:scale-200"
         >
           Send
         </button>
