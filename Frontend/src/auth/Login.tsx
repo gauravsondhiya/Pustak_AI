@@ -3,7 +3,7 @@ import { Label } from "../components/ui/label";
 import { Input } from "../components/ui/input";
 import { cn } from "../lib/utils";
 import { useNavigate } from "react-router";
-
+import axios from "axios";
 function Login() {
   let navigate = useNavigate();
 
@@ -24,22 +24,14 @@ function Login() {
 
   let logindata = async () => {
     try {
-      let method = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(inputvalue),
-      };
-      let fetchdata = await fetch(import.meta.env.VITE_Login_Route, method);
-      let data = await fetchdata.json();
-      console.log(data);
-
-      if (data === true) {
-        navigate("/");
-      } else {
-        setouterror("Invalid email or password");
+      let fetchdata = await axios.post('http://localhost:3000/api/auth/login', inputvalue);
+      if(fetchdata.status==200){
+       localStorage.setItem("token", JSON.stringify(fetchdata.data.token));
+       navigate("/chat"); 
       }
+      // console.log(fetchdata.status==200)
+      // console.log(fetchdata.data.token)
+
     } catch (error) {
       console.log( error);
       setouterror("Something went wrong! Please try again.");
@@ -48,15 +40,14 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     // ✅ check for empty fields
     if (!inputvalue.email || !inputvalue.password) {
       setouterror("Please fill in all fields before logging in.");
       return;
     }
-
-    setouterror(""); // clear error if all fields filled
     logindata();
+
+    setinputvalue(" "); // clear error if all fields filled
   };
 
   // ✅ disable button if fields are empty
@@ -80,7 +71,7 @@ function Login() {
           <Label htmlFor="email">Email Address</Label>
           <Input
             id="email"
-            value={inputvalue.email}
+            value={inputvalue.email||""}
             name="email"
             onChange={handler}
             placeholder="projectmayhem@gmail.com"
@@ -92,7 +83,7 @@ function Login() {
           <Label htmlFor="password">Password</Label>
           <Input
             id="password"
-            value={inputvalue.password}
+            value={inputvalue.password ||""}
             name="password"
             onChange={handler}
             placeholder="••••••••"

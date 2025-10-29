@@ -13,7 +13,7 @@ function Signup() {
     password: "",
   });
   let [outerror, setouterror] = useState("");
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setInputValues((prev) => ({
       ...prev,
@@ -38,8 +38,8 @@ function Signup() {
       console.log("Error uploading data:", error);
     }
   };
- 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (
       !inputValues.email ||
@@ -51,7 +51,7 @@ function Signup() {
       return;
     }
     uploadData();
-    console.log("Form Data:", inputValues);
+    // console.log("Form Data:", inputValues);
     setInputValues({
       name: "",
       surname: "",
@@ -59,7 +59,7 @@ function Signup() {
       password: "",
     });
   };
-   const isDisabled =
+  const isDisabled =
     !inputValues.email ||
     !inputValues.password ||
     !inputValues.name ||
@@ -108,10 +108,11 @@ function Signup() {
           <Input
             id="email"
             name="email"
+            type="email"
             onChange={handleChange}
             value={inputValues.email || ""}
             placeholder="projectmayhem@fc.com"
-            type="email"
+            
           />
         </LabelInputContainer>
 
@@ -123,12 +124,17 @@ function Signup() {
             onChange={handleChange}
             value={inputValues.password || ""}
             placeholder="••••••••"
-            type="password"
+            type="text"
           />
         </LabelInputContainer>
 
         <button
-          className="group/btn relative block h-10 w-full rounded-md bg-gradient-to-br from-black to-neutral-600 font-medium text-white shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:bg-zinc-800 dark:from-zinc-900 dark:to-zinc-900 dark:shadow-[0px_1px_0px_0px_#27272a_inset,0px_-1px_0px_0px_#27272a_inset]"
+          className={`group/btn relative block h-10 w-full rounded-md font-medium text-white shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset]
+            ${
+              isDisabled
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-gradient-to-br from-black to-neutral-600"
+            }`}
           type="submit"
           disabled={isDisabled}
         >
@@ -136,6 +142,7 @@ function Signup() {
           <BottomGradient />
         </button>
 
+        <p>Forget Your Password</p>
         <div className="my-8 h-[1px] w-full bg-gradient-to-r from-transparent via-neutral-300 to-transparent dark:via-neutral-700" />
       </form>
     </div>
