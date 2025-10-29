@@ -4,6 +4,7 @@ import { Label } from "../components/ui/label";
 import { Input } from "../components/ui/input";
 import { cn } from "../lib/utils";
 import { useNavigate } from "react-router";
+import { NavLink } from "react-router";
 function Signup() {
   let navigate = useNavigate();
   const [inputValues, setInputValues] = useState({
@@ -112,7 +113,6 @@ function Signup() {
             onChange={handleChange}
             value={inputValues.email || ""}
             placeholder="projectmayhem@fc.com"
-            
           />
         </LabelInputContainer>
 
@@ -141,8 +141,16 @@ function Signup() {
           Sign up &rarr;
           <BottomGradient />
         </button>
+        <div className="mt-3">
+          <p>Forget Your Password</p>
+          <p>
+            Already Have an account{" "}
+            <NavLink className="font-bold hover:text-gray-400" to="/login">
+              Login
+            </NavLink>
+          </p>
+        </div>
 
-        <p>Forget Your Password</p>
         <div className="my-8 h-[1px] w-full bg-gradient-to-r from-transparent via-neutral-300 to-transparent dark:via-neutral-700" />
       </form>
     </div>

@@ -3,6 +3,7 @@ import { Label } from "../components/ui/label";
 import { Input } from "../components/ui/input";
 import { cn } from "../lib/utils";
 import { useNavigate } from "react-router";
+import { NavLink } from "react-router";
 import axios from "axios";
 function Login() {
   let navigate = useNavigate();
@@ -26,7 +27,9 @@ function Login() {
     try {
       let fetchdata = await axios.post('http://localhost:3000/api/auth/login', inputvalue);
       if(fetchdata.status==200){
-       localStorage.setItem("token", JSON.stringify(fetchdata.data.token));
+       localStorage.setItem("token", JSON.stringify(fetchdata.data));
+        console.log(fetchdata.data)
+
        navigate("/chat"); 
       }
       // console.log(fetchdata.status==200)
@@ -46,7 +49,6 @@ function Login() {
       return;
     }
     logindata();
-
     setinputvalue(" "); // clear error if all fields filled
   };
 
@@ -104,8 +106,8 @@ function Login() {
           Login &rarr;
           <BottomGradient />
         </button>
-
-        <div className="my-8 h-[1px] w-full bg-gradient-to-r from-transparent via-neutral-300 to-transparent dark:via-neutral-700" />
+       <p className='mt-3'>New to Pustak AI ? <NavLink to='/signup' className="font-bold ">Create Account</NavLink></p>
+   
       </form>
     </div>
   );
