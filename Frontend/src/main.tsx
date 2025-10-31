@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App.tsx";
 import { BrowserRouter } from "react-router";
 import UserContextProvider from "./context/UserContextProvider";
-createRoot(document.getElementById("root")!).render(
+createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <UserContextProvider>
       <App />
