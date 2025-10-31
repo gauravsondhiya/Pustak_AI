@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.tsx";
 import { BrowserRouter } from "react-router";
-import UserContextProvider from "./context/UserContextProvider";
+import UserContextProvider from "./Context/UserContextProvider";
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <UserContextProvider>

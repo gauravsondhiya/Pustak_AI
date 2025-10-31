@@ -7,11 +7,8 @@ const Video = () => {
       <div className="col-span-6 ">
         <FaCloudUploadAlt className="text-8xl" />
         <h1 className='text-2xl font-bold'>Upload your sources</h1>
-        <p className='sm:w-[80%] mt-3'>
-          Upload PDFs, websites, YouTube videos, audio files, Google Docs, or
-          Google Slides, and NotebookLM will summarize them and make interesting
-          connections between topics, all powered by Gemini 2.0’s multimodal
-          understanding capabilities.
+        <p className='sm:w-[80%] mt-3 font-semibold text-gray-500'>
+          Pustak AI turns PDFs, web pages, YouTube videos, Google Docs, and Slides into searchable knowledge. Upload or link your content, and Pustak_AI will extract text, transcribe audio, chunk and embed it, then serve instant, context-aware answers and cross-document insights using a multimodal model. No jargon: you upload, we index, you ask — we answer with citations and relevant connections.
         </p>
       </div>
       <div className="col-span-6">

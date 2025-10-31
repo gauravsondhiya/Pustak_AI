@@ -16,7 +16,7 @@ const Navbar = () => {
 };
 
   return (
-    <nav className="top-0 m-auto bg-white z-50 fixed border border-neutral-800 p-2 w-full flex justify-around">
+    <nav className="top-0 m-auto bg-white z-50 fixed  border-neutral-800 p-2 w-full flex justify-around">
       <NavLink to="/">
         <Button
           borderRadius="1.75rem"
