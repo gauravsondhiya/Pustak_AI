@@ -8,7 +8,7 @@ import axios from "axios";
 import UserContext from "../Context/User_Context";
 function Login() {
   let navigate = useNavigate();
-   const { user,setUser } = useContext(UserContext); 
+  const { user, setUser } = useContext(UserContext);
 
   let [inputvalue, setinputvalue] = useState({
     email: "",
@@ -27,18 +27,24 @@ function Login() {
 
   let logindata = async () => {
     try {
-      let fetchdata = await axios.post('http://localhost:3000/api/auth/login', inputvalue);
-      if(fetchdata.status==200){
-       localStorage.setItem("token", JSON.stringify(fetchdata.data));
-        console.log(fetchdata.data)
-         setUser(true)
-       navigate("/chat"); 
-      }
-      // console.log(fetchdata.status==200)
-      // console.log(fetchdata.data.token)
+      let fetchdata = await axios.post(
+        "http://localhost:3000/api/auth/login",
+        inputvalue
+      );
+      if (fetchdata.status) {
+        const userData = {
+          status: true,
+          username: fetchdata.data.username,
+          token: fetchdata.data.token,
+        };
 
+        setUser(userData);
+        localStorage.setItem("user", JSON.stringify(userData));
+
+        navigate("/chat");
+      }
     } catch (error) {
-      console.log( error);
+      console.log(error);
       setouterror("Something went wrong! Please try again.");
     }
   };
@@ -75,7 +81,7 @@ function Login() {
           <Label htmlFor="email">Email Address</Label>
           <Input
             id="email"
-            value={inputvalue.email||""}
+            value={inputvalue.email || ""}
             name="email"
             onChange={handler}
             placeholder="projectmayhem@gmail.com"
@@ -87,7 +93,7 @@ function Login() {
           <Label htmlFor="password">Password</Label>
           <Input
             id="password"
-            value={inputvalue.password ||""}
+            value={inputvalue.password || ""}
             name="password"
             onChange={handler}
             placeholder="••••••••"
@@ -108,8 +114,12 @@ function Login() {
           Login &rarr;
           <BottomGradient />
         </button>
-       <p className='mt-3'>New to Pustak AI ? <NavLink to='/signup' className="font-bold ">Create Account</NavLink></p>
-   
+        <p className="mt-3">
+          New to Pustak AI ?{" "}
+          <NavLink to="/signup" className="font-bold ">
+            Create Account
+          </NavLink>
+        </p>
       </form>
     </div>
   );

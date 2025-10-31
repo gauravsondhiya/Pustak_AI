@@ -6,12 +6,12 @@ let Login = async (req, res) => {
   try {
     const { email, password } = req.body;
     // console.log(email)
-    const emailcheck = await siginuser.findOne({ email });
-    if (!emailcheck)
+    const data_check = await siginuser.findOne({ email });
+    if (!data_check)
       return res.status(400).json({
         message: "user not found",
       });
-    const checkpassword = await bycrpt.compare(password, emailcheck.password);
+    const checkpassword = await bycrpt.compare(password, data_check.password);
     if (!checkpassword)
       return res.status(400).json({
         message: checkpassword,
@@ -21,7 +21,7 @@ let Login = async (req, res) => {
       expiresIn: "3h",
     });
     // console.log(token);
-    res.json({ message: "Login successful", token });
+    res.json({ message: "Login successful",status:true, token,username:data_check.name });
   } catch (error) {
     console.log(error);
   }

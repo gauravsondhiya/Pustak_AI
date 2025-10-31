@@ -42,10 +42,10 @@ const Intro2 = () => {
     <>
       <div className="m-auto  flex justify-center mt-5">
         <NavLink to="/chat">
-          <p className="border text-2xl font-bold p-4 rounded-2xl bg-black text-white">
+          <button className="border text-2xl font-bold p-4 rounded-2xl bg-black text-white">
             {" "}
             Get Started
-          </p>
+          </button>
         </NavLink>
       </div>
 

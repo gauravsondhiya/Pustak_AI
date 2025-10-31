@@ -9,11 +9,11 @@ const Navbar = () => {
 
   const { user,setUser } = useContext(UserContext);
 
-  console.log(user +" "+"may navbar se hu")
-  console.log(isLoggedIn +" "+"login check")
+
   let logout = () => {
-    setUser(false)
-  };
+  setUser({ status: false, username: "" });
+  localStorage.removeItem("user");
+};
 
   return (
     <nav className="top-0 m-auto bg-white z-50 fixed border border-neutral-800 p-2 w-full flex justify-around">
@@ -27,9 +27,9 @@ const Navbar = () => {
         </Button>
       </NavLink>
 
-      {user ? (
+      {user.status ? (
         <div className="flex gap-5 items-center text-xl font-bold">
-          <p>"{userInfo}"</p>
+          <p>{user.username}</p>
           <button onClick={logout} className="hover:text-gray-400">
             Logout
           </button>

@@ -5,10 +5,10 @@ const ProtectedRoute = ({ children }) => {
   // api calling se ho rhi ha
   const token_confirmation = true;
   const { user, setUser } = useContext(UserContext);
-
-  if (!user) {
+  
+  if (user.status==false) {
+    
     // Token nahi mila — login pe redirect
-
     return <Navigate to="/login" replace />;
   }
 
