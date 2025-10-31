@@ -1,37 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { LuBrainCircuit } from "react-icons/lu";
 import { Button } from "./components/ui/moving-border";
 import { NavLink } from "react-router";
-
+import UserContext from "./Context/User_Context";
 const Navbar = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(null);
   const [userInfo, setUserInfo] = useState("");
 
-  useEffect(() => {
-  const checkToken = () => {
-    const token = JSON.parse(localStorage.getItem("token"));
-    if (token) {
-      setIsLoggedIn(true);
-      setUserInfo(token.user_info || "User");
-    } else {
-      setIsLoggedIn(false);
-      setUserInfo("");
-    }
-  };
+  const { user,setUser } = useContext(UserContext);
 
-  checkToken(); // run on mount
-
-  // Listen for token changes (even if set in another tab or component)
-  window.addEventListener("storage", checkToken);
-
-  return () => window.removeEventListener("storage", checkToken);
-}, []);
-
-
-  const logout = () => {
-    localStorage.removeItem("token");
-    setIsLoggedIn(false); // ✅ immediately reflect logout in UI
-    setUserInfo("");
+  console.log(user +" "+"may navbar se hu")
+  console.log(isLoggedIn +" "+"login check")
+  let logout = () => {
+    setUser(false)
   };
 
   return (
@@ -46,9 +27,9 @@ const Navbar = () => {
         </Button>
       </NavLink>
 
-      {isLoggedIn ? (
+      {user ? (
         <div className="flex gap-5 items-center text-xl font-bold">
-          <p>{userInfo}</p>
+          <p>"{userInfo}"</p>
           <button onClick={logout} className="hover:text-gray-400">
             Logout
           </button>

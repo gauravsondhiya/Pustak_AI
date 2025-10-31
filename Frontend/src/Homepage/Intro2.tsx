@@ -37,21 +37,15 @@ const Intro2 = () => {
         "Your data is encrypted and secure. We never store or share your personal information or uploaded content.",
     },
   ];
-  let started = () => {
-    console.log("done");
-  };
 
   return (
     <>
       <div className="m-auto  flex justify-center mt-5">
         <NavLink to="/chat">
-        <button
-          onClick={started}
-          className="border text-2xl font-bold p-4 rounded-2xl bg-black text-white"
-        >
-          {" "}
-          Get Started
-        </button>
+          <p className="border text-2xl font-bold p-4 rounded-2xl bg-black text-white">
+            {" "}
+            Get Started
+          </p>
         </NavLink>
       </div>
 
@@ -61,7 +55,6 @@ const Intro2 = () => {
           <HoverEffect items={projects} />
         </div>
       </div>
-
     </>
   );
 };

@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Label } from "../components/ui/label";
 import { Input } from "../components/ui/input";
 import { cn } from "../lib/utils";
 import { useNavigate } from "react-router";
 import { NavLink } from "react-router";
 import axios from "axios";
+import UserContext from "../Context/User_Context";
 function Login() {
   let navigate = useNavigate();
+   const { user,setUser } = useContext(UserContext); 
 
   let [inputvalue, setinputvalue] = useState({
     email: "",
@@ -29,7 +31,7 @@ function Login() {
       if(fetchdata.status==200){
        localStorage.setItem("token", JSON.stringify(fetchdata.data));
         console.log(fetchdata.data)
-
+         setUser(true)
        navigate("/chat"); 
       }
       // console.log(fetchdata.status==200)
