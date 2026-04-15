@@ -51,7 +51,7 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // ✅ check for empty fields
+    
     if (!inputvalue.email || !inputvalue.password) {
       setouterror("Please fill in all fields before logging in.");
       return;
@@ -60,7 +60,7 @@ function Login() {
     setinputvalue(" "); // clear error if all fields filled
   };
 
-  // ✅ disable button if fields are empty
+  
   const isDisabled = !inputvalue.email || !inputvalue.password;
 
   return (
@@ -102,7 +102,8 @@ function Login() {
         </LabelInputContainer>
 
         <button
-          className={`group/btn relative block h-10 w-full rounded-md font-medium text-white shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset]
+          className={`group/btn relative block h-10 w-full 
+            rounded-md font-medium text-white shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset]
             ${
               isDisabled
                 ? "bg-gray-400 cursor-not-allowed"

@@ -78,23 +78,24 @@ const Chat = () => {
   const choosebtn = (type) => setfilestate(type);
 
   return (
-    <div className=" border border-gray-300  grid sm:grid-cols-12 mt-21 h-auto">
-      <div className="sm:col-span-4 border border-gray-300 p-5 ">
+    <div className=" border border-red-600  border-gray-300  grid sm:grid-cols-12 mt-21 h-screen ">
+
+      <div className="border border-green-600  sm:col-span-3 border border-gray-300 p-5 ">
         <h1 className="flex items-center text-2xl gap-4 font-bold p-2">
           <FaUpload /> Upload Your Sources
         </h1>
 
-        <div className="mt-7">
-          <div className="grid grid-cols-4 gap-2 justify-center m-auto [&>button]:p-2 [&>button]:text-xl [&>button]:rounded-2xl [&>button]:bg-black text-white ">
+        <div className="mt-7 border border-red-600">
+          <div className="grid gap-2 m-auto [&>a]:p-2 [&>a]:text-xl [&>a]:rounded-2xl [&>a]:bg-black text-white ">
             {arrbtn.map((e, i) => (
-              <button
+              <a
               className="font-semibold hover:bg-gray-500
            transition-all duration-300 group-hover:scale-200"  
                 key={i}
                 onClick={() => choosebtn(e.type)}
               >
                 {e.btn}
-              </button>
+              </a>
             ))}
           </div>
         </div>

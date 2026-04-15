@@ -7,6 +7,8 @@ import Signup from "./auth/Signup";
 import Chat from "./chat/Chat";
 import { Routes, Route } from "react-router";
 import ProtectedRoute from "./chat/ProtectedRoute";
+
+
 function App() {
   return (
     <>
@@ -15,8 +17,7 @@ function App() {
         <Route path="/" element={<Homepage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route
-          path="/chat"
+        <Route path="/chat"
           element={
             <ProtectedRoute>
               <Chat />

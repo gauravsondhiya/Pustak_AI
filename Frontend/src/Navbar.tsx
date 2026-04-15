@@ -3,17 +3,23 @@ import { LuBrainCircuit } from "react-icons/lu";
 import { Button } from "./components/ui/moving-border";
 import { NavLink } from "react-router";
 import UserContext from "./Context/User_Context";
+import Drop_down from "../src/components/Drop-down";
+
 const Navbar = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(null);
-  const [userInfo, setUserInfo] = useState("");
-
-  const { user,setUser } = useContext(UserContext);
 
 
+  const { user, setUser } = useContext(UserContext);
+
+  const [btn_check, setbtn_check] = useState(false);
+  let on_off = () => {
+    setbtn_check(!btn_check);
+    console.log(btn_check);
+  };
+  
   let logout = () => {
-  setUser({ status: false, username: "" });
-  localStorage.removeItem("user");
-};
+    setUser({ status: false, username: "" });
+    localStorage.removeItem("user");
+  };
 
   return (
     <nav className="top-0 m-auto bg-white z-50 fixed  border-neutral-800 p-2 w-full flex justify-around">
@@ -27,12 +33,30 @@ const Navbar = () => {
         </Button>
       </NavLink>
 
-      {user.status ? (
-        <div className="flex gap-5 items-center text-xl font-bold">
-          <p>{user.username}</p>
-          <button onClick={logout} className="hover:text-gray-400">
-            Logout
+      {true ? (
+        <div className="relative  text-left mt-2">
+          <button
+            onClick={on_off}
+            className=" font-bold rounded-full px-4 py-2 text-2xl text-white  bg-gray-500 transition  "
+          >
+            U
           </button>
+
+          {btn_check && (
+            <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-10">
+              <ul className="py-1">
+                {/* <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                  Profile
+                </li>
+                <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                  Settings
+                </li> */}
+                <li className="px-4 py-2 hover:bg-gray-100 text-red-600 cursor-pointer">
+                  Logout
+                </li>
+              </ul>
+            </div>
+          )}
         </div>
       ) : (
         <div className="flex gap-5 items-center text-xl font-bold">

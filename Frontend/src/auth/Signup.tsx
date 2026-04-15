@@ -1,10 +1,11 @@
-"use client";
+
 import React, { useState } from "react";
 import { Label } from "../components/ui/label";
 import { Input } from "../components/ui/input";
 import { cn } from "../lib/utils";
 import { useNavigate } from "react-router";
 import { NavLink } from "react-router";
+
 function Signup() {
   let navigate = useNavigate();
   const [inputValues, setInputValues] = useState({
