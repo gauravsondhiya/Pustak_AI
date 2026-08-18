@@ -16,14 +16,14 @@ const authMiddleware = (req, res, next) => {
     );
     console.log(decoded)
     req.user = decoded;
-
+        
     next(); 
 
   } catch (error) {
     console.log(error)
-    // return res.status(401).json({
-    //   message: "Invalid or expired token",
-    // });
+    return res.status(401).json({
+      message: "Invalid or expired token",
+    });
   }
 };
 

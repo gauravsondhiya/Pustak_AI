@@ -4,10 +4,11 @@ import { Input } from "../components/ui/input";
 import { cn } from "../lib/utils";
 import { NavLink,useNavigate } from "react-router";
 import axios from "axios";
-
+import UserContext from "../Context/User_Context";
 
 function Login() {
  let navigate = useNavigate();
+  const { user, setUser } = useContext(UserContext);
   let [inputvalue, setinputvalue] = useState({
     email: "",
     password: "",
@@ -29,24 +30,14 @@ function Login() {
         "http://localhost:3000/api/auth/login",
         inputvalue ,{
     withCredentials: true
-  }
-      );
-       console.log(fetchdata.data.message)
-       if(fetchdata.data.message=="login success"){
-        navigate("/chat");
-       }
-      // if (fetchdata.status) {
-      //   const userData = {
-      //     status: true,
-      //     username: fetchdata.data.username,
-      //     token: fetchdata.data.token,
-      //   };
-
-      //   setUser(userData);
-      
-
-      //   navigate("/chat");
-      // }
+  });
+   let name = fetchdata.data.user.toUpperCase();
+       console.log()
+       if(fetchdata.status==200){
+        setUser(name[0])
+         navigate("/")
+      }
+    
     } catch (error) {
       console.log(error);
       setouterror("Something went wrong! Please try again.");

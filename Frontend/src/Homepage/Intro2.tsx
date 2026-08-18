@@ -9,7 +9,6 @@ const Intro2 = () => {
       title: "Upload Any Files",
       description:
         "Support for PDFs, Word documents, images, and more. Our AI processes and understands your content instantly.",
-      // link: "https://stripe.com",
     },
     {
       title: "Website Analysis",

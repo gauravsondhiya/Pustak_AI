@@ -1,7 +1,7 @@
 import pool from "../config/db.js";
 import bcrypt from "bcrypt";
 
-const Signup_Routes = async (req, res) => {
+const Signup_controller = async (req, res) => {
   try {
     let { firstname, lastname, email, password } = req.body;
 
@@ -36,4 +36,4 @@ const Signup_Routes = async (req, res) => {
   }
 };
 
-export default Signup_Routes;
+export default Signup_controller;

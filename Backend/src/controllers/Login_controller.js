@@ -10,11 +10,11 @@ const Login_Controller = async (req, res) => {
     if (!email || !password) {
       res.status(400).json("fill all details");
     }
-    let email_check = await pool.query("select * from users where email=$1", [
+    let data_check = await pool.query("select * from users where email=$1", [
       email,
     ]);
 
-    if (!email_check.rows.length > 0) {
+    if (!data_check.rows.length > 0) {
       return res.status(409).json({
         message: "Email not exists",
       });
@@ -22,7 +22,7 @@ const Login_Controller = async (req, res) => {
 
     let pass_check = await bcrypt.compare(
       password,
-      email_check.rows[0].password,
+      data_check.rows[0].password,
     );
    
     if (!pass_check) {
@@ -37,13 +37,13 @@ const Login_Controller = async (req, res) => {
   }
 );
 
-res.cookie("authtoken", token)
-//    {
-//   httpOnly: true,
-//   secure: false,
-//   maxAge: 3 * 60 * 60 * 1000,
-// });
+res.cookie("authtoken", token ,{
+  httpOnly: true,
+  secure: false,
+  maxAge: 3 * 60 * 60 * 1000,
+});
     res.status(200).json({
+      user:data_check.rows[0].firstname,
       message: "login success",
     });
 

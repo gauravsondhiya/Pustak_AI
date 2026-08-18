@@ -9,25 +9,23 @@ import Video from "./Video";
 
 const Intro = () => {
   return (
-    <div >
+    <div>
       <div className="relative flex flex-col items-start justify-start  border-red-500">
-        <BackgroundRippleEffect/>
+        <BackgroundRippleEffect />
         <div className="mt-60 w-[90%] m-auto   text-center">
           <h1 className=" flex items-center justify-center gap-3 font-bold text-neutral-800 text-7xl  ">
             पुस्तक AI <LuBrainCircuit />
           </h1>
           {/* <h2 className="text-2xl mt-3">Your AI-Powered Notebook</h2> */}
           <p className="  text-neutral-800 sm:text-4xl text-2xl flex items-center gap-4 justify-center mt-4">
-           Your AI-Powered Notebook that truly knows your data.
+            Your AI-Powered Notebook that truly knows your data.
           </p>
         </div>
-        
       </div>
 
-        {/* three process intro? */}
+      {/* three process intro? */}
 
-
-        <div className="border mt-10 border-neutral-800 w-[60%] m-auto p-5 grid sm:grid-cols-12 gap-10 sm:gap-0 rounded-2xl">
+      <div className="border mt-10 border-neutral-800 w-[60%] m-auto p-5 grid sm:grid-cols-12 gap-10 sm:gap-0 rounded-2xl">
         <div className=" flex flex-col items-center font-bold  sm:col-span-4">
           <MdOutlineDocumentScanner className="text-6xl " />
           <h1 className="font-semibold">Upload Files</h1>
@@ -52,11 +50,10 @@ const Intro = () => {
           </p>
         </div>
       </div>
-       <div>
-
-      <Intro2 />
-       </div>
-       <Video/>
+      <div>
+        <Intro2 />
+      </div>
+      <Video />
     </div>
   );
 };
