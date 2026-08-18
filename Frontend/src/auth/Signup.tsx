@@ -5,16 +5,20 @@ import { Input } from "../components/ui/input";
 import { cn } from "../lib/utils";
 import { useNavigate } from "react-router";
 import { NavLink } from "react-router";
-
+import axios from "axios";
 function Signup() {
+
   let navigate = useNavigate();
+
   const [inputValues, setInputValues] = useState({
-    name: "",
-    surname: "",
+    firstname: "",
+    lastname: "",
     email: "",
     password: "",
   });
+
   let [outerror, setouterror] = useState("");
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setInputValues((prev) => ({
@@ -25,17 +29,11 @@ function Signup() {
 
   const uploadData = async () => {
     try {
-      const response = await fetch(import.meta.env.VITE_SIGNUP_ROUTE, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(inputValues),
-      });
-      const data = await response.json();
-      if (data === true) {
-        navigate("/login");
-      }
+      const response = await axios.post("http://localhost:3000/api/auth/signup", inputValues);
+      console.log(response)
+      // if (data === true) {
+      //   navigate("/login");
+      // }
     } catch (error) {
       console.log("Error uploading data:", error);
     }
@@ -46,8 +44,8 @@ function Signup() {
     if (
       !inputValues.email ||
       !inputValues.password ||
-      !inputValues.name ||
-      !inputValues.surname
+      !inputValues.firstname ||
+      !inputValues.lastname
     ) {
       setouterror("Please fill in all fields before logging in.");
       return;
@@ -55,8 +53,8 @@ function Signup() {
     uploadData();
     // console.log("Form Data:", inputValues);
     setInputValues({
-      name: "",
-      surname: "",
+      firstname: "",
+      lastname: "",
       email: "",
       password: "",
     });
@@ -64,8 +62,8 @@ function Signup() {
   const isDisabled =
     !inputValues.email ||
     !inputValues.password ||
-    !inputValues.name ||
-    !inputValues.surname;
+    !inputValues.firstname ||
+    !inputValues.lastname;
 
   return (
     <div className="mt-22 shadow-input mx-auto w-full max-w-md rounded-none bg-white p-4 md:rounded-2xl md:p-8 dark:bg-black">
@@ -73,7 +71,7 @@ function Signup() {
         Welcome to पुस्तक AI
       </h2>
       <p className="mt-2 max-w-sm text-sm text-neutral-600 dark:text-neutral-300">
-        Your AI-powered library assistant – sign up & start exploring!
+        Your AI-powered  assistant – sign up & start exploring!
       </p>
       {outerror && (
         <p className="mt-3 text-sm text-red-500 font-medium">{outerror}</p>
@@ -83,10 +81,10 @@ function Signup() {
           <LabelInputContainer>
             <Label htmlFor="name">First name</Label>
             <Input
-              id="name"
-              name="name"
+              id="firstname"
+              name="firstname"
               onChange={handleChange}
-              value={inputValues.name || ""}
+              value={inputValues.firstname || ""}
               placeholder="Tyler"
               type="text"
             />
@@ -95,10 +93,10 @@ function Signup() {
           <LabelInputContainer>
             <Label htmlFor="surname">Last name</Label>
             <Input
-              id="surname"
-              name="surname"
+              id="lastname"
+              name="lastname"
               onChange={handleChange}
-              value={inputValues.surname || ""}
+              value={inputValues.lastname || ""}
               placeholder="Durden"
               type="text"
             />

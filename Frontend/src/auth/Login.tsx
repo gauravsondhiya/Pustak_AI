@@ -2,14 +2,12 @@ import React, { useContext, useState } from "react";
 import { Label } from "../components/ui/label";
 import { Input } from "../components/ui/input";
 import { cn } from "../lib/utils";
-import { useNavigate } from "react-router";
-import { NavLink } from "react-router";
+import { NavLink,useNavigate } from "react-router";
 import axios from "axios";
-import UserContext from "../Context/User_Context";
-function Login() {
-  let navigate = useNavigate();
-  const { user, setUser } = useContext(UserContext);
 
+
+function Login() {
+ let navigate = useNavigate();
   let [inputvalue, setinputvalue] = useState({
     email: "",
     password: "",
@@ -29,20 +27,26 @@ function Login() {
     try {
       let fetchdata = await axios.post(
         "http://localhost:3000/api/auth/login",
-        inputvalue
+        inputvalue ,{
+    withCredentials: true
+  }
       );
-      if (fetchdata.status) {
-        const userData = {
-          status: true,
-          username: fetchdata.data.username,
-          token: fetchdata.data.token,
-        };
-
-        setUser(userData);
-        localStorage.setItem("user", JSON.stringify(userData));
-
+       console.log(fetchdata.data.message)
+       if(fetchdata.data.message=="login success"){
         navigate("/chat");
-      }
+       }
+      // if (fetchdata.status) {
+      //   const userData = {
+      //     status: true,
+      //     username: fetchdata.data.username,
+      //     token: fetchdata.data.token,
+      //   };
+
+      //   setUser(userData);
+      
+
+      //   navigate("/chat");
+      // }
     } catch (error) {
       console.log(error);
       setouterror("Something went wrong! Please try again.");
@@ -69,7 +73,7 @@ function Login() {
         Welcome to पुस्तक AI
       </h2>
       <p className="mt-2 max-w-sm text-sm text-neutral-600 dark:text-neutral-300">
-        Your AI-powered library assistant – sign in & start exploring!
+        Your AI-powered assistant – sign in & start exploring!
       </p>
 
       {outerror && (

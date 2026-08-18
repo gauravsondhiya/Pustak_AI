@@ -1,29 +1,30 @@
-import express from "express";
-import authRoutes from "./routes/auth_routes.js";
-import Chat from './routes/Chat_routes.js'
-import cors from "cors";
-import dbcalling from "./config/db.js";
-import "dotenv/config"
-const app = express();
+import express from 'express'
+import "dotenv/config"; 
+import { dbconnect } from './src/config/db.js';
+import authroutes from './src/routes/authroutes.js'
+import cors from 'cors'
+import chatroute from './src/routes/chatroute.js'
+import cookieParser from 'cookie-Parser'
+const app = express()
+dbconnect()
 
- dbcalling();
+app.use(cookieParser());
+app.listen(3000)
+app.use (express.json())
+
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true
+  })
+);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+
+app.use("/api/auth",authroutes)
+app.use("/api",chatroute)
 
 
-app.use(cors());
-app.use(express.json())
 
-//  login and signup
-app.use("/api/auth", authRoutes);
-
-//  datasave and chat route
-app.use("/api/auth",Chat)
-
-
-
-app.get("/", (req, res) => {
-  res.send("Pustak_AI running");
-});
-
-app.listen(process.env.PORT, () => {
-  console.log("server running");
-});
+app.get("/check",(req,res)=>{
+    res.send("hello i am alive")
+    console.log(process.env.DATABASE_URL);
+})
