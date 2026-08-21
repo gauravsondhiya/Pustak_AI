@@ -4,12 +4,14 @@ import Homepage from "./Homepage/Intro";
 import Footer from "./Footer";
 import Login from "./auth/Login";
 import Signup from "./auth/Signup";
-import Chat from "./chat/Chat_sources";
+import Chat_box from "./chat/Chat_box";
+import Slider from "./chat/Slider"
 import { Routes, Route } from "react-router";
 import ProtectedRoute from "./chat/ProtectedRoute";
 import { LoaderOne } from "./components/ui/loader";
 import UserContext from "./Context/User_Context";
 import axios from "axios";
+import Main_Chat from "./chat/Main_Chat";
 function App() {
 
   let [login_status, setlogin_status] = useState();
@@ -57,7 +59,7 @@ function App() {
           path="/chat"
           element={
             <ProtectedRoute>
-              <Chat />
+              <Main_Chat/>
             </ProtectedRoute>
           }
         />

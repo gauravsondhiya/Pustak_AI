@@ -3,9 +3,10 @@ import UserContext from "./User_Context";
 
 const UserContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-   console.log(user)
+  const [isOn, setIsOn] = useState(true);
+
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user, setUser, isOn, setIsOn }}>
       {children}
     </UserContext.Provider>
   );

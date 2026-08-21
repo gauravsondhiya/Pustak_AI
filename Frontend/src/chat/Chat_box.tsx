@@ -1,10 +1,12 @@
 import axios from "axios";
 import React, { useState } from "react";
 
-const Chat2 = () => {
+
+const Chat_box = () => {
+
   const [userinput, setuserinput] = useState("");
   const [datapass, setdatapass] = useState([]);
-  const [loading, setloading] = useState(false); // default false
+  const [loading, setloading] = useState(false); 
 
   const get_fetch_data = async () => {
     console.log(userinput);
@@ -60,7 +62,7 @@ const Chat2 = () => {
   };
 
   return (
-    <div className="sm:col-span-8 h-[600px]  border-amber-400 flex flex-col">
+    <div className="col-span-8 h-[600px]  border-amber-400 flex flex-col">
       {/* Header */}
       <div className="p-3 border-b border-gray-400">
         <h1 className="text-2xl font-bold">Chat</h1>
@@ -122,4 +124,4 @@ const Chat2 = () => {
   );
 };
 
-export default Chat2;
+export default Chat_box;

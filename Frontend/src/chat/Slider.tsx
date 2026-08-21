@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { FaUpload } from "react-icons/fa";
 import axios from "axios";
-import Chat2 from "./Chat_box";
+import Chatbox from "./Chat_box";
 
-const Chat = () => {
+const Slider = () => {
   const [filestate, setfilestate] = useState(null);
   const [tempfile, settempfile] = useState([]);
   const [loading, setloading] = useState(false);
@@ -78,9 +78,7 @@ const Chat = () => {
   const choosebtn = (type) => setfilestate(type);
 
   return (
-    <div className=" border border-red-600  border-gray-300  grid sm:grid-cols-12 mt-21 h-screen ">
-
-      <div className="border border-green-600  sm:col-span-3 border border-gray-300 p-5 ">
+      <div className="border border-green-600 bg-white absolute md:static  w-[60%] sm:w-full h-full p-5 ">
         <h1 className="flex items-center text-2xl gap-4 font-bold p-2">
           <FaUpload /> Upload Your Sources
         </h1>
@@ -225,9 +223,9 @@ const Chat = () => {
         </div>
       </div>
 
-      <Chat2 />
-    </div>
+     
+   
   );
 };
 
-export default Chat;
+export default Slider;
