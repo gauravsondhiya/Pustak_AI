@@ -7,7 +7,7 @@ const Main_Chat = () => {
   const { isOn, setIsOn } = useContext(UserContext);
 
   return (
-    <div className=" border border-red-600 grid sm:grid-cols-12 mt-21 h-screen ">
+    <div className="w-full  border-red-600 grid sm:grid-cols-12 mt-20 fixed ">
        <div className="md:hidden">
           {isOn && <Slider />}
        </div>

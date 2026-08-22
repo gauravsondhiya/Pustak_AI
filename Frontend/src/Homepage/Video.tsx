@@ -1,8 +1,10 @@
 import React from "react";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import demo from "../assets/demo.mp4";
+import Footer from "../Footer";
 const Video = () => {
   return (
+    <>
     <div className="w-[80%]  m-auto  grid sm:grid-cols-12 p-5 gap-5">
       <div className="col-span-6 ">
         <FaCloudUploadAlt className="text-8xl" />
@@ -22,6 +24,8 @@ const Video = () => {
         />
       </div>
     </div>
+    <Footer/>
+    </>
   );
 };
 

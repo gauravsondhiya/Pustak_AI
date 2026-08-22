@@ -4,6 +4,7 @@ import { Button } from "./components/ui/moving-border";
 import { NavLink, useNavigate, useLocation } from "react-router";
 import UserContext from "./Context/User_Context";
 import { FiAlignLeft } from "react-icons/fi";
+import { BiArrowToLeft } from "react-icons/bi";
 import Slider from "./chat/Slider";
 import Main_Chat from "./chat/Main_Chat";
 
@@ -44,15 +45,18 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="top-0 fixed border border-red-500 m-auto bg-white  p-2 w-full flex justify-around">
+      <nav className="top-0 fixed  border-red-500 m-auto bg-white  p-2 w-full flex justify-around">
         {/* sider  */}
 
         {location.pathname == "/chat" && (
-          <div className="sm:hidden border border-red-500">
-            <button className="h-1 w-8" onClick={side_btn}>
-              <FiAlignLeft />
+          
+            <button className="h-15 text-3xl sm:hidden" onClick={side_btn}>
+              {
+                isOn ? <BiArrowToLeft /> :  <FiAlignLeft />
+              }
+            
             </button>
-          </div>
+         
         )}
 
         <NavLink to="/">

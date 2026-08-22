@@ -12,7 +12,7 @@ const Intro = () => {
     <div>
       <div className="relative flex flex-col items-start justify-start  border-red-500 mt-18">
         <BackgroundRippleEffect  />
-        <div className="mt-60 w-[90%] m-auto   text-center">
+        <div className="mt-30 w-[90%] m-auto   text-center">
           <h1 className=" flex items-center justify-center gap-3 font-bold text-neutral-800 text-7xl  ">
             पुस्तक AI <LuBrainCircuit />
           </h1>

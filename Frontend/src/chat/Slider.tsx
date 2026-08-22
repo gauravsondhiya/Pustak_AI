@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaUpload } from "react-icons/fa";
 import axios from "axios";
-import Chatbox from "./Chat_box";
+
 
 const Slider = () => {
   const [filestate, setfilestate] = useState(null);
@@ -74,16 +74,18 @@ const Slider = () => {
     { btn: "Youtube", type: "url" },
     { btn: "Text", type: "text" },
   ];
+const dummy_arr =["Files","Website","Files","Website","Files","Website","Files","Website","Files","Website","Files","Website","Website","Files","Website","Website","Files","Website"]
 
   const choosebtn = (type) => setfilestate(type);
 
   return (
-      <div className="border border-green-600 bg-white absolute md:static  w-[60%] sm:w-full h-full p-5 ">
+      <div className=" overflow-y-scroll   border-green-600 bg-white absolute md:static w-[70%] sm:w-full h-[calc(100vh-4rem)] p-5 ">
+
         <h1 className="flex items-center text-2xl gap-4 font-bold p-2">
           <FaUpload /> Upload Your Sources
         </h1>
 
-        <div className="mt-7 border border-red-600">
+        <div className="mt-7  border-red-600 ">
           <div className="grid gap-2 m-auto [&>a]:p-2 [&>a]:text-xl [&>a]:rounded-2xl [&>a]:bg-black text-white ">
             {arrbtn.map((e, i) => (
               <a
@@ -221,6 +223,16 @@ const Slider = () => {
             ))
           )}
         </div>
+
+
+
+        {
+          dummy_arr.map((e,i)=>(
+            <div key={i} className="text-xl grid ">
+              {e}
+            </div>
+          ))
+        }
       </div>
 
      

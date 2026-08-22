@@ -62,7 +62,7 @@ const Chat_box = () => {
   };
 
   return (
-    <div className="col-span-8 h-[600px]  border-amber-400 flex flex-col">
+    <div className=" sm:col-span-9 h-[calc(100vh-4rem)]  border-amber-400 flex flex-col">
       {/* Header */}
       <div className="p-3 border-b border-gray-400">
         <h1 className="text-2xl font-bold">Chat</h1>
@@ -70,7 +70,7 @@ const Chat_box = () => {
       </div>
 
       {/* Chat Screen */}
-      <div className="flex-1 p-4 overflow-y-auto space-y-3">
+      <div className="flex-1 p-4 overflow-y-auto space-y-3  border-black">
         {datapass.map((e, i) => (
           <div
             key={i}
@@ -101,14 +101,14 @@ const Chat_box = () => {
       </div>
 
       {/* Input Section */}
-      <div className="border-t border border-gray-300  p-5 flex gap-3">
-        <input
+      <div className="border-t  border-black  p-5 flex gap-3">
+        <textarea
           type="text"
           value={userinput}
           onChange={(e) => setuserinput(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && sendbtn()}
           placeholder="Ask A Question About Your Sources..."
-          className="border w-[90%] font-semibold rounded-2xl p-4 focus:ring-2 outline-none"
+          className="border w-[90%] font-semibold rounded-2xl p-2 focus:ring-2 outline-none resize-y"
         />
         <button
           onClick={sendbtn}
