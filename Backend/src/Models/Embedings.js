@@ -6,10 +6,10 @@ dotenv.config({
   path: "../../.env",
 });
 
-const embeddings = new GoogleGenerativeAIEmbeddings({
+const Embeddings = new GoogleGenerativeAIEmbeddings({
   apiKey:process.env.GOOGLE_API_KEY,
   model: "gemini-embedding-001",
 });
 
 
-export default embeddings;
+export default Embeddings;

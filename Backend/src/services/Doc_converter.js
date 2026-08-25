@@ -2,7 +2,6 @@ import { RecursiveCharacterTextSplitter } from "@langchain/textsplitters";
 import Datasaved from './Datasaved.js'
 import { Document } from "@langchain/core/documents";
 
-
 const Doc_converter = async (input_value) => {
 try {
   const data = [

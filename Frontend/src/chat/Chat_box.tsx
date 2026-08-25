@@ -64,8 +64,8 @@ const Chat_box = () => {
   return (
     <div className=" sm:col-span-9 h-[calc(100vh-4rem)]  border-amber-400 flex flex-col">
       {/* Header */}
-      <div className="p-3 border-b border-gray-400">
-        <h1 className="text-2xl font-bold">Chat</h1>
+      <div className="p-2 border-b border-gray-400">
+        <h1 className="text-xl font-bold">Chat</h1>
         <p>Ask questions about your uploaded sources</p>
       </div>
 
@@ -108,7 +108,7 @@ const Chat_box = () => {
           onChange={(e) => setuserinput(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && sendbtn()}
           placeholder="Ask A Question About Your Sources..."
-          className="border w-[90%] font-semibold rounded-2xl p-2 focus:ring-2 outline-none resize-y"
+          className="border w-[90%] font-semibold rounded-2xl p-2 focus:ring-2 outline-none resize-y text-left "
         />
         <button
           onClick={sendbtn}

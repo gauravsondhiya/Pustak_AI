@@ -122,7 +122,7 @@ const Slider = () => {
           {filestate === "weburl" && (
             <div className="mt-3 p-2 flex justify-between items-center">
               <input
-                type="text"
+               type="url" 
                 name="website_data"
                 value={inputvalues.website_data}
                 onChange={handleinputvalues}
@@ -144,7 +144,7 @@ const Slider = () => {
           {filestate === "url" && (
             <div className="mt-3 p-2 flex justify-between items-center">
               <input
-                type="text"
+                type="url" 
                 name="youtube_data"
                 value={inputvalues.youtube_data}
                 onChange={handleinputvalues}
