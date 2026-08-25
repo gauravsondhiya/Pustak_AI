@@ -1,4 +1,4 @@
-import pool from "../config/db.js";
+import pool from "../config/Neon_db.js";
 
 const LoginCheck_controller = async (req,res)=>{
     let email = req.user.email

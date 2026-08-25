@@ -23,9 +23,9 @@ const Chat_box = () => {
 
     try {
       const response = await axios.post(
-        import.meta.env.VITE_CHAT_DATA,
-        { userinput },
-        { headers: { "Content-Type": "application/json" } }
+      'http://localhost:3000/api/chat',
+        { userinput }
+        // ,{ headers: { "Content-Type": "application/json" } }
       );
 
       // Step 2: Remove loader & add bot reply

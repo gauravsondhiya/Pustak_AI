@@ -1,7 +1,9 @@
 
 
 const Chat_controller = async (req,res)=>{
-    res.send("chat controoler")
+    let {userinput} = req.body
+    
+    res.send("chat controoler"+" " +userinput)
 }
 
 

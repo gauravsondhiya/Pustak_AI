@@ -1,4 +1,4 @@
-import pool from "../config/db.js";
+import pool from "../config/Neon_db.js";
 import bcrypt from "bcrypt";
 
 const Signup_controller = async (req, res) => {

@@ -45,10 +45,7 @@ const Slider = () => {
 
     try {
       const response = await axios.post(
-        import.meta.env.VITE_UPLOAD_DATA,
-        formData,
-        { headers: { "Content-Type": "multipart/form-data" } }
-      );
+        'http://localhost:3000/api/datasave',formData);
       console.log(response.data);
       alert("Upload successful!");
 
@@ -74,7 +71,7 @@ const Slider = () => {
     { btn: "Youtube", type: "url" },
     { btn: "Text", type: "text" },
   ];
-const dummy_arr =["Files","Website","Files","Website","Files","Website","Files","Website","Files","Website","Files","Website","Website","Files","Website","Website","Files","Website"]
+
 
   const choosebtn = (type) => setfilestate(type);
 
@@ -192,7 +189,7 @@ const dummy_arr =["Files","Website","Files","Website","Files","Website","Files",
         </div>
 
         {/* Uploaded sources preview */}
-        <div className=" mt-2 p-3 rounded-xl">
+        {/* <div className=" mt-2 p-3 rounded-xl">
           <h2 className="text-lg font-semibold mb-2 ">Uploaded Sources</h2>
           {tempfile.length === 0 ? (
             <p className="text-gray-500">No uploads yet.</p>
@@ -222,17 +219,11 @@ const dummy_arr =["Files","Website","Files","Website","Files","Website","Files",
               </div>
             ))
           )}
-        </div>
+        </div> */}
 
 
 
-        {
-          dummy_arr.map((e,i)=>(
-            <div key={i} className="text-xl grid ">
-              {e}
-            </div>
-          ))
-        }
+       
       </div>
 
      

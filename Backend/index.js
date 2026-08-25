@@ -1,6 +1,6 @@
 import express from 'express'
 import "dotenv/config"; 
-import { dbconnect } from './src/config/db.js';
+import { dbconnect } from './src/config/Neon_db.js';
 import authroutes from './src/routes/authroutes.js'
 import cors from 'cors'
 import chatroute from './src/routes/chatroute.js'
@@ -18,7 +18,7 @@ app.use(
     credentials: true
   })
 );                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-
+app.use(express.urlencoded({ extended: true }));
 app.use("/api/auth",authroutes)
 app.use("/api",chatroute)
 
