@@ -34,7 +34,7 @@ function App() {
       // console.log(data)
       setUser(data[0])
     } catch (error) {
-      // console.log(error);
+        
     }
   };
 

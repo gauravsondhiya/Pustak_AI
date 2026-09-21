@@ -30,8 +30,8 @@ function Signup() {
   const uploadData = async () => {
     try {
       const response = await axios.post(import.meta.env.VITE_SIGNUP_ROUTE, inputValues);
-      console.log(response)
-      if (data === true) {
+      console.log(response.status)
+      if (response.status == 201) {
         navigate("/login");
       }
     } catch (error) {
