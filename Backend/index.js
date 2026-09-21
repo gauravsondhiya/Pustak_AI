@@ -14,10 +14,11 @@ const allowedOrigins = [
   "http://localhost:5173",
   process.env.FRONTEND_URL,
 ];
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
-app.use (express.json())
+app.use(express.json())
 
 app.use(
   cors({
@@ -31,6 +32,6 @@ app.use("/api",chatroute)
 
 
 
-app.get("/check",(req,res)=>{
+app.get("/",(req,res)=>{
     res.send("hello i am alive")
 })

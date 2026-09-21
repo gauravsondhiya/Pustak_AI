@@ -9,7 +9,6 @@ const Chat_box = () => {
   const [loading, setloading] = useState(false); 
 
   const get_fetch_data = async () => {
-   
     setloading(true);
 
     // Step 1: Show loader message in chat immediately
@@ -23,17 +22,14 @@ const Chat_box = () => {
 
     try {
       const response = await axios.post(
-     import.meta.env.VITE_CHAT_DATA,
-        { userinput }
-        // ,{ headers: { "Content-Type": "application/json" } }
-      );
+     import.meta.env.VITE_CHAT_DATA,{ userinput });
 
       // Step 2: Remove loader & add bot reply
       setdatapass((pre) => [
         ...pre.filter((msg) => msg.id !== "loader"), // remove loader
         {
           id: Date.now(),
-          msgsend: response.data,
+          msgsend: String(response.data),
           sender: "bot",
         },
       ]);
@@ -79,7 +75,7 @@ const Chat_box = () => {
             }`}
           >
             <div
-              className={` px-4 py-2 rounded-2xl max-w-xs break-words ${
+              className={`px-4 py-2 rounded-2xl max-w-xs break-words ${
                 e.sender === "user"
                   ? "bg-black text-white rounded-br-none"
                   : "bg-gray-300 text-black rounded-bl-none"

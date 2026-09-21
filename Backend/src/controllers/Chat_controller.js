@@ -2,7 +2,6 @@ import Embeddings from "../Models/Embedings.js"
 import { QdrantVectorStore } from "@langchain/qdrant";
 import Qdrant_client from "../config/Qudrant_db.js";
 import OpenAI from "openai";
-
 import 'dotenv/config'
 
 const openai  = new OpenAI({
@@ -12,9 +11,9 @@ const openai  = new OpenAI({
 });
 
 const Chat_controller = async (req,res)=>{
-    let {userinput} = req.body
-
-
+  try {
+       let {userinput} = req.body
+    
      const vectorStore = await QdrantVectorStore.fromExistingCollection(
     Embeddings,
     {
@@ -22,7 +21,7 @@ const Chat_controller = async (req,res)=>{
      collectionName: "Pustak_AI_DB",
     }
   );
-
+   
     const vectorSearcher = vectorStore.asRetriever({
     k: 3,
   });
@@ -37,7 +36,7 @@ const Chat_controller = async (req,res)=>{
     ${JSON.stringify(relevantChunk)} `;
 
     const response = await openai.chat.completions.create({
-     model: "openai/gpt-oss-20b",
+     model: "openai/gpt-oss-120b",
     messages: [
         {   role: "system",
             content: SYSTEM_PROMPT
@@ -49,9 +48,13 @@ const Chat_controller = async (req,res)=>{
     ],
 });
 
-console.log(response.choices[0].message.content);
+console.log(response);
 
     res.json(response.choices[0].message.content)
+  } catch (error) {
+    console.log(error)
+    res.send(error)
+  }
 }
 
 
