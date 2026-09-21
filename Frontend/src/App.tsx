@@ -31,22 +31,16 @@ function App() {
         setlogin_status(false);
       }
       let data = response.data.firstname.toUpperCase()
-      console.log(data)
+      // console.log(data)
       setUser(data[0])
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
   useEffect(() => {
     check_login();
   }, []);
-  // if(true) return (
-  //   <div className="flex h-screen items-center justify-center">
-
-  // <LoaderOne/>
-  //   </div>
-  // )
 
   return (
     <>
