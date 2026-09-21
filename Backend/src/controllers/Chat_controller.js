@@ -6,10 +6,8 @@ import OpenAI from "openai";
 import 'dotenv/config'
 
 const openai  = new OpenAI({
-    // apiKey:process.env.GOOGLE_API_KEY,
-    //  baseURL: "https://generativelanguage.googleapis.com/v1beta/openai/",
      apiKey: process.env.GROQ_API_KEY ,
-    baseURL: "https://api.groq.com/openai/v1",
+    baseURL:process.env.GROQ_BASE_URL ,
      
 });
 

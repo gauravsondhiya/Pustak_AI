@@ -7,9 +7,7 @@ import multer from "multer";
 const upload = multer();
 const router = express.Router();
 
-// router.get("/chat",authMiddleware,Chat_controller)
-
-router.post("/chat",Chat_controller)
+router.get("/chat",authMiddleware,Chat_controller)
 router.post("/datasave",upload.none(),Datasave_controller)
 
 

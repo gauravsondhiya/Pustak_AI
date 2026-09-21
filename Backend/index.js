@@ -26,5 +26,4 @@ app.use("/api",chatroute)
 
 app.get("/check",(req,res)=>{
     res.send("hello i am alive")
-    console.log(process.env.DATABASE_URL);
 })
