@@ -27,7 +27,7 @@ function Login() {
   let logindata = async () => {
     try {
       let fetchdata = await axios.post(
-        "http://localhost:3000/api/auth/login",
+        import.meta.env.VITE_LOGIN_ROUTE,
         inputvalue ,{
     withCredentials: true
   });

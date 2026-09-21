@@ -29,11 +29,11 @@ function Signup() {
 
   const uploadData = async () => {
     try {
-      const response = await axios.post("http://localhost:3000/api/auth/signup", inputValues);
+      const response = await axios.post("import.meta.env.VITE_SIGNUP_ROUTE", inputValues);
       console.log(response)
-      // if (data === true) {
-      //   navigate("/login");
-      // }
+      if (data === true) {
+        navigate("/login");
+      }
     } catch (error) {
       console.log("Error uploading data:", error);
     }

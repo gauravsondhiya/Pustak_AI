@@ -9,7 +9,7 @@ const Chat_box = () => {
   const [loading, setloading] = useState(false); 
 
   const get_fetch_data = async () => {
-    console.log(userinput);
+   
     setloading(true);
 
     // Step 1: Show loader message in chat immediately
@@ -23,7 +23,7 @@ const Chat_box = () => {
 
     try {
       const response = await axios.post(
-      'http://localhost:3000/api/chat',
+     import.meta.env.VITE_CHAT_DATA,
         { userinput }
         // ,{ headers: { "Content-Type": "application/json" } }
       );

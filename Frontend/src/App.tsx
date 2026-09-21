@@ -21,7 +21,7 @@ function App() {
   let check_login = async () => {
     try {
       let response = await axios.get(
-        "http://localhost:3000/api/auth/login_check",
+        import.meta.env.VITE_LOGIN_CHECK,
         {
           withCredentials: true,
         },

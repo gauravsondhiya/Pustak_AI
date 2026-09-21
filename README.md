@@ -79,6 +79,7 @@ Pustak AI follows this general pipeline:
 * PostgreSQL
 * Neon PostgreSQL
 * `pg`
+* Qdrant DB
 
 ### AI / RAG
 

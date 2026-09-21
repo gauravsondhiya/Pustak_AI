@@ -45,7 +45,7 @@ const Slider = () => {
 
     try {
       const response = await axios.post(
-        'http://localhost:3000/api/datasave',formData);
+       import.meta.env.VITE_UPLOAD_DATA ,formData);
       console.log(response.data);
       alert("Upload successful!");
 

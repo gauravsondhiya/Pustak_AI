@@ -5,8 +5,6 @@ import { NavLink, useNavigate, useLocation } from "react-router";
 import UserContext from "./Context/User_Context";
 import { FiAlignLeft } from "react-icons/fi";
 import { BiArrowToLeft } from "react-icons/bi";
-import Slider from "./chat/Slider";
-import Main_Chat from "./chat/Main_Chat";
 
 const Navbar = () => {
   let navigate = useNavigate();
@@ -16,17 +14,15 @@ const Navbar = () => {
 
   const [btn, setbtn] = useState(false);
 
-
-
   let on_off = () => {
     setTimeout(() => {
       setbtn(false);
-    }, 1000);
+    }, 2000);
     setbtn(!btn);
   };
 
   let logout = async () => {
-    let response = await fetch("http://localhost:3000/api/auth/logout", {
+    let response = await fetch(import.meta.env.VITE_LOGOUT, {
       method: "POST",
       credentials: "include",
     });
@@ -109,24 +105,6 @@ const Navbar = () => {
         )}
       </nav>
 
-      {/* {false && (
-        <div
-          className="bg-green-500 h-[calc(100vh-4rem)]
-      absolute sm:block
-      left-0
-      top-17
-      w-[25%]
-      h-[200px]"
-        >
-          <div className="border border-black">
-            <div className="flex justify-between text-2xl mt-3 p-2 font-bold">
-              <p> Upload Your Sources</p>
-              <button onClick={side_btn}>❌</button>
-            </div>
-           <Slider/>
-          </div>
-        </div>
-      )} */}
 
     
     </>
